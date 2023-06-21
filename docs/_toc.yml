@@ -6,3 +6,4 @@ root: pages/introduction
 chapters:
 - file: pages/data-and-features
 - file: pages/references
+- file: pages/test
