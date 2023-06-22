@@ -2,7 +2,7 @@
 Results on all 3,142 US counties are listed bellow.
 
 ### Ground Truth
-![](/TFT-pytorch/results/combined_ground_truth.jpg)
+![](/docs/images/combined_ground_truth.jpg)
 
 ### Benchmark
 
