@@ -1,15 +1,15 @@
-## Results
+# Results
 Results on all 3,142 US counties are listed bellow.
 
-### Ground Truth
+## Ground Truth
 ![](../images/combined_ground_truth.jpg)
 
-### Benchmark
+## Benchmark
 
 Test result comparison of TFT with five other deep learning models.
 ![](../images/Test_comparison.jpg)
 
-### Temporal Patterns
+## Temporal Patterns
 
 Time series data typically exhibit various temporal patterns,
 such as trend, seasonal, and cyclic patterns. Here we investigate how well our TFT model can learn and interpret these patterns by conducting
@@ -21,7 +21,7 @@ experiments on data with these patterns.
 3. `Cyclic` holiday patterns (Thanksgiving, Christmas). During holidays, hospitals and COVID-19 test centers often have reduced staffing and operating hours, leading to fewer tests and reported case. Leading to a drop in attention for those days. ![holiday_pattern.jpg](../images/holiday_pattern.jpg)
 4. `Trend`: TFT model's test performance on all US counties for additional data splits learning different infection trends ![Test_splits.jpg](../images/Test_splits.jpg)
 
-### Spatial Patterns
+## Spatial Patterns
 
 Spatial distribution of COVID-19 cases in US counties and corresponding attention weights from TFT.
 
