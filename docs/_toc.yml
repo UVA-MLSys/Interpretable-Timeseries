@@ -5,6 +5,7 @@ format: jb-book
 root: pages/introduction
 chapters:
 - file: pages/data-and-features
+- file: pages/problem
 - file: pages/results
 - file: pages/references
 - file: pages/test
