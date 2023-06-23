@@ -13,7 +13,7 @@ $\hat y_i(t, \tau) $ represents the predicted number of cases in a day at a give
 Fig. 1 provides a high-level overview of the data model preparation for our research:
 
 <p align="center">
-<img src="../images/image.png" alt="Alt text"/>
+<img src="../images/data_prep.png" alt="Alt text"/>
 
 </p>
 
