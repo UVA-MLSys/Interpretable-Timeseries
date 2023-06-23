@@ -6,6 +6,7 @@ root: pages/introduction
 chapters:
 - file: pages/data-and-features
 - file: pages/problem
+- file: pages/tft
 - file: pages/results
 - file: pages/features
 - file: pages/references
