@@ -26,3 +26,14 @@ We use a variety of metrics including MAE, RMSE, RMSLE, SMAPE, and NNSE because 
 | NNSE|  robust to error variance and has a range of [0,1] | No
 
 Our TFT model excels all other models in terms of all 5 evaluation metrics. 
+
+| Model | MAE | RMSE | RMSLE | SMAPE | NNSE
+|---------|--------|----------| ----------| ----------| ----------|
+| TFT | **35.68**| **221.3** | **1.347**|**0.842**| **0.679**|
+| LSTM | 40.27|267.1|1.434|1.054|0.616|
+| Bi-LSTM | 40.36| 261.8| 1.465| 1.022| 0.626|
+| NHiTS | 36.79| 247.5| 1.366| 1.066| 0.628|
+| NBEATS| 41.22| 244.8| 1.649| 1.134| 0.633|
+
+Our line graph comparing prediction performances also reinforces our conclusions from the evaluation metrics.
+![Split](Prediction-Performance.jpg)
