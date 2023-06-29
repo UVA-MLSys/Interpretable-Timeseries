@@ -12,10 +12,7 @@ $\hat y_i(t, \tau) $ represents the predicted number of cases in a day at a give
 
 Fig. 1 provides a high-level overview of the data model preparation for our research:
 
-<p align="center">
-<img src="../images/data_prep.png" alt="Alt text"/>
-
-</p>
+![](../images/data_prep.jpg)
 
 As shown in the image above, we feed three types of covariates at inputs into the time series model, using the past 13 days to predict the next 15 days of time series data. 
 
