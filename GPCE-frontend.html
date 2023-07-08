@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .right-ul {
+      list-style-type: none;
+      margin-right:20px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+
+    nav li {
+      display: inline-block;
+    }
+
+    nav li a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      font-size: 18px;
+      font-family: 'Montserrat', sans-serif; 
+    }
+
+    section {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #section1 {
+      background-color: #ff8080;
+    }
+
+    #section2 {
+      background-color: #80b3ff;
+    }
+
+    #section3 {
+      background-color: #80ff80;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scrolling animation
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          var destination = document.querySelector(this.getAttribute('href'));
+          var offsetTop = destination.offsetTop;
+
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="top"></div>
+  <nav>
+    <ul class="left-ul">
+      <li> <a href="#top"> <strong>INTERPRETATING COUNTY-LEVEL COVID INFECTIONS </strong></a></li>
+    </ul>
+
+    <ul class="right-ul">
+      <li><a href="#INTRODUCTION">INTRO</a></li>
+      <li><a href="#DATA">DATA</a></li>
+      <li><a href="#GOAL">GOAL</a></li>
+      <li><a href="#EXPERIMENTS">EXPERIMENTS</a></li>
+      <li><a href="#RESULTS">RESULTS</a></li>
+      <li><a href="#INTERPRETATION">INTERPRETATION</a></li>
+      <li><a href="#TEAM">TEAM</a></li>
+    </ul>
+  </nav>
+
+  <section id="INTRODUCTION">
+    <h1>Section 1</h1>
+  </section>
+
+  <section id="DATA">
+    <h1>Section 2</h1>
+  </section>
+
+  <section id="GOAL">
+    <h1>Section 3</h1>
+  </section>
+
+  <section id="EXPERIMENTS">
+    <h1>Section 3</h1>
+  </section>
+
+  <section id="RESULTS">
+    <h1>Section 3</h1>
+  </section>
+
+  <section id="INTERPRETATION">
+    <h1>Section 3</h1>
+  </section>
+
+  <section id="TEAM">
+    <h1>Section 3</h1>
+  </section>
+
+</body>
+</html>
+
