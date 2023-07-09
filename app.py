@@ -1,5 +1,4 @@
 from flask import Flask, request, make_response,render_template
-from flask_cors import CORS
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
@@ -7,7 +6,6 @@ import plotly
 import json
 
 app = Flask(__name__)
-CORS(app)
 
 @app.route('/')
 def index():
