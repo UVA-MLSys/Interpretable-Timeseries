@@ -10,3 +10,4 @@ Werkzeug==2.3.6
 zipp==3.16.0
 plotly==5.3.1
 pandas
+holidays
