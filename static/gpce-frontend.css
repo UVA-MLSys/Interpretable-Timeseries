@@ -1,4 +1,4 @@
-.right-ul a.active {
+  .right-ul a.active {
     background-color: grey;
   }
   section{
@@ -10,6 +10,24 @@
     justify-content: center;
     align-items: center;
   }
+
+  .performance-container{
+    display: flex;
+  }
+  .performance-container img{
+    flex: 1;
+    width: 650px;
+    height: auto;
+  }
+
+  .Data-Split-container{
+  }
+  .Data-Split-container img{
+    width: 800px;
+  }
+
+
+
 
   #INTRODUCTION p{
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -101,5 +119,9 @@
 
   #GOAL{
     height:1600px;
+  }
+
+  #Performance{
+    height: 800px;
   }
 

@@ -56,10 +56,9 @@
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
-  <div id="top"></div>
   <nav>
     <ul class="left-ul">
-      <li> <a href="#top"> <strong>INTERPRETATING COUNTY-LEVEL COVID INFECTIONS </strong></a></li>
+      <li>  <strong>INTERPRETATING COUNTY-LEVEL COVID INFECTIONS </strong></li>
     </ul>
     <ul class="right-ul">
       <li><a href="#INTRODUCTION">INTRO</a></li>
@@ -99,21 +98,43 @@
   </section>
 
   <section id="EXPERIMENTS">
-    <h1>Section 3</h1>
+    <h1> Experiments </h1>
+    <p>
+      In our Data-Split, validation set comprises the next 15 days after the training period, and the test set comprises the following 15 days after the validation set.
+    </p>
+    <div class="Data-Split-container">
+      <img src=static/.png> 
+    </div>
+
+    <p>For Benchmarking purposes, we have fine-tuned five Deep Learning Model: 
+      our proposed TFT model, LSTM, Bi-LSTM, NBEATS, and NHiTS, with last four being benchmarks.
+      All Models are optimized with Adam Optimizer and MSE Loss. We select best configurations based on validation loss. 
+    </p>
+
+    <div class="Data-Split-container">
+      <img src=static/.png> 
+    </div>
+
 
   </section>
 
   <section id="RESULTS">
-    <h1>Section 3</h1>
+    <h1>Model Performance</h1>
+    <p> In terms of both ground truth and benchmarking with other popular Deep Learning Models, our proposed TFT models have proved remarkable performance.</p>
+    <div class="performance-container">
+      <img src="static/Benchmark.png" >
+      <img src="static/Ground-Truth.png" >
+    </div>
   </section>
 
   <section id="INTERPRETATION">
-    <h1>Section 3</h1>
+    <h1>Spatio-Temporal Interpretation</h1>
+    <p> Time Series Data typically exhibits temporal pattern such as trend, seasonal, and cyclic pattern. And our proposed TFT are able to detect such patterns. </p>
   </section>
 
 
 
-  
+
   <section id="TEAM">
     <h1>Section 3</h1>
   </section>
