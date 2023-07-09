@@ -3,6 +3,8 @@ from flask_cors import CORS
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
+import plotly
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -160,10 +162,8 @@ def index():
         secondary_y=True,
     )
 
-    fig.write_html('holiday_pattern.html')
-
-    fig.show()
-    return render_template('GPCE-frontend.html')
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template("GPCE-frontend.html", graphJSON=graphJSON)
 
 
 
