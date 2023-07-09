@@ -1,7 +1,43 @@
 .right-ul a.active {
     background-color: grey;
   }
+  section{
+    background-color: black;
+  }
 
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #INTRODUCTION p{
+    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: white;
+    border-color: white;
+    border-style: dashed;
+    padding: 0;
+    font-size: 26px;
+    text-align: center;
+  }
+
+  p{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: white;
+    line-height: 1.5;
+    padding: 0;
+    font-size: 23px;
+  }
+
+
+  h1{
+    text-align: center;
+    color: white;
+    font-size: 40px;
+  }
   body {
     margin: 0;
     padding: 0;
@@ -43,6 +79,7 @@
   }
 
   section {
+    flex-direction: column;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -61,3 +98,8 @@
   #section3 {
     background-color: #80ff80;
   }
+
+  #GOAL{
+    height:1600px;
+  }
+

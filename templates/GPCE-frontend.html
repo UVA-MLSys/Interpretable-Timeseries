@@ -3,30 +3,57 @@
 <head>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Smooth scrolling animation
+      var sections = document.querySelectorAll('section');
+      var navLinks = document.querySelectorAll('nav a');
+    
       document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
-
+    
           var destination = document.querySelector(this.getAttribute('href'));
           var offsetTop = destination.offsetTop;
-
+    
           window.scrollTo({
             top: offsetTop,
             behavior: 'smooth'
           });
-
-          var currentActive = document.querySelector('.right-ul .active');
-          if (currentActive) {
-            currentActive.classList.remove('active');
-          }
-          this.classList.add('active');
         });
       });
+    
+      window.addEventListener('scroll', function() {
+        var currentSection = null;
+    
+        // Find the currently visible section
+        for (var i = sections.length - 1; i >= 0; i--) {
+          var section = sections[i];
+          var rect = section.getBoundingClientRect();
+    
+          if (rect.top <= 0) {
+            currentSection = section;
+            break;
+          }
+        }
+    
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+        });
+    
+        if (currentSection) {
+          var targetLink = document.querySelector('nav a[href="#' + currentSection.id + '"]');
+          if (targetLink) {
+            targetLink.classList.add('active');
+          }
+        }
+      });
     });
+    
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel = "stylesheet" href="static/gpce-frontend.css">
+  <link href='https://fonts.googleapis.com/css2?family=Lora&display=swap'rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
   <div id="top"></div>
@@ -34,11 +61,10 @@
     <ul class="left-ul">
       <li> <a href="#top"> <strong>INTERPRETATING COUNTY-LEVEL COVID INFECTIONS </strong></a></li>
     </ul>
-
     <ul class="right-ul">
       <li><a href="#INTRODUCTION">INTRO</a></li>
-      <li><a href="#DATA">DATA</a></li>
       <li><a href="#GOAL">GOAL</a></li>
+      <li><a href="#DATA">DATA</a></li>
       <li><a href="#EXPERIMENTS">EXPERIMENTS</a></li>
       <li><a href="#RESULTS">RESULTS</a></li>
       <li><a href="#INTERPRETATION">INTERPRETATION</a></li>
@@ -46,20 +72,35 @@
     </ul>
   </nav>
 
-  <section id="INTRODUCTION">
-    <h1>Section 1</h1>
-  </section>
-
-  <section id="DATA">
-    <h1>Section 2</h1>
+  <section  id="INTRODUCTION">
+    <h1> <strong>Interpreting County-Level COVID-19 Infections <br>using Deep Learning for Time Series </strong> </h1>
+    <p> Using Temporal Fusion Transformer to predict County-Level Infections <br>with spatial-temporal Interpretations </p>
   </section>
 
   <section id="GOAL">
+    <h1><strong> Problem Statement </h1>
+    <p> Our goal was to create a deep learning model that would accurately predict daily COVID-19 cases. To achieve this, we used a multivariate, multi-horizon approach that integrates heterogeneous types of inputs for each county.
+      In Mathematical notation, we write our problem statement as follow:
+    </p>
+    <p> \( \hat y_i(t, \tau) = f(\tau, y_{i, t-k:t}, \textbf{z}_{i, t-k:t}, \textbf{x}_{i, t-k:t+\tau}, \textbf{s}_i ) \) </p>
+    <p> \(\hat y_i(t, \tau)\) represents the predicted number of cases in a day at a given time \(t \in [0, T_i]\) for any county \(i\), with \(\tau\) as days into the future, and \(T_i\) as the length of the time series period. 
+    In our study, we use the previous 13 days of data to forecast the next 15 days of data ---- this is where the multi-horizon approach comes in. 
+    <div class="image-container">
+      <img src="static/goal.png" style="height:600px;">
+    </div>
+    <p> Our three types of inputs are: <br>
+      1. <strong>Static Inputs</strong> : Each county <em>i</em> is associated with a set of static inputs \(s_i\), which do not vary over time and are specific to that county's demographics. <br>
+      2. <strong>Observed or Past Inputs</strong> : Observed inputs are time-varying features known at each timestamp \(t \in [0, T_i]\) (e.g., Vacciation, Disease Spread, Social Distancing, Transmissible Cases), but their future values are unknown. We incorporate all past information within a lookback window of <em>k</em> (the past 13 days), using target (cases) and observed inputs upto the forecast start time *t*:      \(\space y_{i,t-k:t} = {y_{i,t-k}, ..., y_{i, t} }\) and \(z_{i, t-k:t} = {z_{i,t-k}, ..., z{i, t}}\). <br>
+      3. <strong>Known Future Inputs </strong>: These inputs \(x_{i, t}\) can be measured beforehand, which in our case are the sine and cosine of the day of a week at a given date, and are known at the time of prediction. We also add known future inputs across the entire range for the TFT. </p>
+  </section>
+
+  <section id="DATA">
     <h1>Section 3</h1>
   </section>
 
   <section id="EXPERIMENTS">
     <h1>Section 3</h1>
+
   </section>
 
   <section id="RESULTS">
@@ -70,6 +111,9 @@
     <h1>Section 3</h1>
   </section>
 
+
+
+  
   <section id="TEAM">
     <h1>Section 3</h1>
   </section>
