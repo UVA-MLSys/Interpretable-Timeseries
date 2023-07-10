@@ -99,7 +99,11 @@
   </section>
 
   <section id="DATA">
-    <h1>Section 3</h1>
+    <h1>DATA</h1>
+    <p>We collected our dataset from multiple sources, including CDC (Centers for Disease Control and Prevention), USA Facts [15], and Unacast [16]. The collected data covers a time frame from February 29, 2020, to May 17, 2022, and includes a wide range of county-level features. However, for the vaccination feature, we used data from the CDC [17] starting from December 14, 2020, when the US initiated a nationwide COVID-19 vaccination campaign, as it was the earliest available data.</p>
+    <div class="Data-Split-container">
+      <img src=static/Data.png> 
+    </div>
   </section>
 
   <section id="EXPERIMENTS">
@@ -107,18 +111,15 @@
     <p>
       In our Data-Split, validation set comprises the next 15 days after the training period, and the test set comprises the following 15 days after the validation set.
     </p>
-    <div class="Data-Split-container">
-      <img src=static/.png> 
-    </div>
-
-    <p>For Benchmarking purposes, we have fine-tuned five Deep Learning Model: 
+    <p style="margin-top:5px">For Benchmarking purposes, we have fine-tuned five Deep Learning Model: 
       our proposed TFT model, LSTM, Bi-LSTM, NBEATS, and NHiTS, with last four being benchmarks.
       All Models are optimized with Adam Optimizer and MSE Loss. We select best configurations based on validation loss. 
     </p>
 
     <div class="Data-Split-container">
-      <img src=static/.png> 
+      <img src=static/Experiment-result.png> 
     </div>
+    <p> We could see that across all measuring criterias, our TFT model has achieved the state-of-art performance.</p>
 
 
   </section>
@@ -134,9 +135,11 @@
 
   <section id="INTERPRETATION">
     <h1>Spatio-Temporal Interpretation</h1>
-    <p> Time Series Data typically exhibits temporal pattern such as trend, seasonal, and cyclic pattern. And our proposed TFT are able to detect such patterns. </p>
-    <div id="chart" class="chart">
-    <div id="chart2" class="chart2"></div>
+    <p> Time Series Data typically exhibits temporal pattern such as trend, cyclic, and seasonal pattern. And our proposed TFT are able to detect such patterns. 
+      Below are two interactive plots that respectively demonstrates cyclic holiday pattern and weekly seasonal pattern.
+    </p>
+    <div id="chart" class="chart" style="width: 1000px">
+    <div id="chart2" class="chart2" style="width: 1000px"></div>
     </div>
   </section>
 
@@ -144,7 +147,10 @@
 
 
   <section id="TEAM">
-    <h1>Section 3</h1>
+    <h1>Team</h1>
+    <div>
+      <img style ="width: 1200px" src="static/Team.png">
+    </div>
   </section>
 
 </body>

@@ -23,7 +23,7 @@
   .Data-Split-container{
   }
   .Data-Split-container img{
-    width: 800px;
+    width: 1200px;
   }
 
 
@@ -122,7 +122,20 @@
     height:1600px;
   }
 
-  #Performance{
-    height: 800px;
+  #RESULTS{
+    height: 1200px;
   }
 
+  #INTERPRETATION{
+    height: 2000px;
+  }
+
+  #DATA{
+    height: 900px;
+  }
+
+
+  #DATA p{
+    padding: 0;
+    text-align: center;
+  }
