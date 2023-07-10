@@ -136,7 +136,7 @@
     <h1>Spatio-Temporal Interpretation</h1>
     <p> Time Series Data typically exhibits temporal pattern such as trend, seasonal, and cyclic pattern. And our proposed TFT are able to detect such patterns. </p>
     <div id="chart" class="chart">
-
+    <div id="chart2" class="chart2"></div>
     </div>
   </section>
 
@@ -152,6 +152,8 @@
 <script type="text/javascript">
   var graphs = {{graphJSON | safe }} ;
   Plotly.plot("chart", graphs, {});
+  var graph2 = {{graph2JSON | safe }}
+  Plotly.plot("chart2", graph2, {})
 </script>
 
 </html>

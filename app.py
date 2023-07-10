@@ -4,6 +4,7 @@ from plotly.subplots import make_subplots
 import pandas as pd
 import plotly
 import json
+import statsmodels.api as sm
 
 app = Flask(__name__)
 
@@ -161,7 +162,144 @@ def index():
     )
 
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template("GPCE-frontend.html", graphJSON=graphJSON)
+
+    predictions = pd.read_csv('static/predictions.csv')
+    predictions['Date'] = pd.to_datetime(predictions['Date'])
+    predictions['weekday'] = predictions.Date.dt.dayofweek
+
+    # analyzing against train attention weights
+    predictions = predictions[predictions['split']=='train']
+
+    predictions_summed_by_county = predictions.groupby(
+        ['FIPS'])[['Cases']].aggregate('sum').reset_index()
+
+    predictions_summed_by_date = predictions.groupby(
+    ['Date', 'weekday'])[['Cases']].aggregate('sum').reset_index()
+    case_autocorrelation = sm.tsa.acf(
+    predictions_summed_by_date['Cases'], nlags=21
+) 
+    X = list(range(1, 22))
+    Y = case_autocorrelation[1:]
+
+    trace = go.Scatter(
+        x=X,
+        y=Y,
+        mode='lines',
+        name='Daily Cases',
+        line=dict(color='blue'),
+        showlegend=True,
+        hovertemplate='Lag (days): %{x}<br>Auto-correlation: %{y:.3f}<extra></extra>'
+    )
+
+    annotations = []
+    for index in range(7, 22, 7):
+        y = Y[index - 1]
+        annotation = dict(
+            x=index,
+            y=y,
+            xref='x',
+            yref='y',
+            text=f"{y:0.3f}",
+            showarrow=True,
+            arrowhead=7,
+            ax=-40,
+            ay=50
+        )
+        annotations.append(annotation)
+
+    dashed_lines = [
+        go.Scatter(
+            x=[x, x],
+            y=[0, 1],
+            mode='lines',
+            name=f'x={x}',
+            line=dict(color='black', dash='dash'),
+            showlegend=False
+        )
+        for x in [7, 14, 21]
+    ]
+
+    layout = go.Layout(
+        xaxis=dict(
+            title='Lag (days)',
+            tickmode='linear',
+            tick0=0,
+            dtick=7
+        ),
+        yaxis=dict(
+            title='Auto-correlation',
+            range=[0, 1],
+            tickformat = '.1f'
+        ),
+        legend=dict(
+            x=0.82,
+            y=0.95,
+            borderwidth=1
+        ),
+        annotations=annotations,
+        plot_bgcolor='white',
+        shapes=[
+            go.layout.Shape(
+                type="line",
+                x0=0,
+                y0=0,
+                x1=0,
+                y1=1,
+                line=dict(
+                    color='black',
+                    width=1
+                )
+            ),
+            go.layout.Shape(
+                type="line",
+                x0=1,
+                y0=0,
+                x1=21,
+                y1=0,
+                line=dict(
+                    color='black',
+                    width=1
+                )
+            ),
+            go.layout.Shape(
+                type="line",
+                x0=0,
+                y0=0,
+                x1=1,
+                y1=0,
+                line=dict(
+                    color='black',
+                    width=1
+                )
+            ),
+            go.layout.Shape(
+                type="line",
+                x0=0,
+                y0=1,
+                x1=21,
+                y1=1,
+                line=dict(
+                    color='black',
+                    width=1
+                )
+            ),
+            go.layout.Shape(
+                type="line",
+                x0=0,
+                y0=0,
+                x1=0,
+                y1=1,
+                line=dict(
+                    color='black',
+                    width=1
+                )
+            )
+        ]
+    )
+
+    fig2 = go.Figure(data=[trace] + dashed_lines, layout=layout)
+    graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template("GPCE-frontend.html", graphJSON=graphJSON, graph2JSON=graph2JSON)
 
 
 
