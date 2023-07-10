@@ -11,3 +11,4 @@ zipp==3.16.0
 pandas
 plotly
 holidays
+statsmodels
