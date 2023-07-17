@@ -10,5 +10,6 @@ chapters:
 - file: pages/experiments
 - file: pages/results
 - file: pages/FeatureImportance
+- file: pages/replication
 - file: pages/Related-Work-Conclusion
 - file: pages/references
