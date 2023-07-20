@@ -51,8 +51,8 @@ function getDataByCounty(buttonId) {
 function drawLineGraph(data) {
   console.log(data)
   // Set up the dimensions and margins of the plot
-  const width = 500;
-  const height = 300;
+  const width = 800;
+  const height = 600;
   const margin = { top: 20, right: 20, bottom: 30, left: 40 };
 
   // Create the SVG element
@@ -86,23 +86,51 @@ function drawLineGraph(data) {
     svg.append('g')
       .call(yAxis);
 
-  // Create a line generator
-  const predictedLine = d3.line()
-      .x(d => xScale(d.Date))
-      .y(d => yScale(d.Predicted_Cases));
 
-    // Create the line path for the predicted cases
-    svg.append('path')
-      .datum(data)
-      .attr('class', 'line predicted')
-      .attr('d', predictedLine)
-      .attr('fill', 'none') // Remove any fill
-      .attr('stroke', 'red') // Customize the color for the actual cases;
+    const legendItems = [
+      { label: 'Predicted Cases', color: 'red' },
+      { label: 'Actual Cases', color: 'blue' },
+      // You can add more legend items for additional lines if needed
+  ];
 
-    // Create a line generator for the actual cases
-    const actualLine = d3.line()
-      .x(d => xScale(d.Date))
-      .y(d => yScale(d.Cases));
+  const legendGroup = svg.append('g')
+      .attr('class', 'legend')
+      .attr('transform', `translate(${width - 700}, 20)`);
+
+  const legendEntries = legendGroup.selectAll('.legend-entry')
+      .data(legendItems)
+      .enter()
+      .append('g')
+      .attr('class', 'legend-entry')
+      .attr('transform', (d, i) => `translate(0, ${i * 20})`);
+
+  legendEntries.append('rect')
+      .attr('width', 10)
+      .attr('height', 10)
+      .attr('fill', d => d.color);
+
+  legendEntries.append('text')
+      .attr('x', 15)
+      .attr('y', 10)
+      .text(d => d.label);
+
+// Create a line generator
+const predictedLine = d3.line()
+    .x(d => xScale(d.Date))
+    .y(d => yScale(d.Predicted_Cases));
+
+  // Create the line path for the predicted cases
+  svg.append('path')
+    .datum(data)
+    .attr('class', 'line predicted')
+    .attr('d', predictedLine)
+    .attr('fill', 'none') // Remove any fill
+    .attr('stroke', 'red') // Customize the color for the actual cases;
+
+  // Create a line generator for the actual cases
+  const actualLine = d3.line()
+    .x(d => xScale(d.Date))
+    .y(d => yScale(d.Cases));
 
     // Create the line path for the actual cases
     svg.append('path')
@@ -110,5 +138,5 @@ function drawLineGraph(data) {
       .attr('class', 'line actual')
       .attr('d', actualLine)
       .attr('fill', 'none') // Remove any fill
-      .attr('stroke', 'green') // Customize the color for the actual cases;
+      .attr('stroke', 'blue') // Customize the color for the actual cases;
 }
