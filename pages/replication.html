@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Code Replication &#8212; Interpreting County-Level COVID-19 Infections</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pages/replication';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Related Work and Conclusions" href="Related-Work-Conclusion.html" />
+    <link rel="prev" title="Feature Importance" href="FeatureImportance.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="introduction.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/coronavirus.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/coronavirus.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="introduction.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="data-and-features.html">Input Data and Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="problem.html">Problem Statement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tft.html">Temporal Fusion Transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FeatureImportance.html">Feature Importance</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Code Replication</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Related-Work-Conclusion.html">Related Work and Conclusions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Data-ScienceHub/gpce-covid" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Data-ScienceHub/gpce-covid/issues/new?title=Issue%20on%20page%20%2Fpages/replication.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/pages/replication.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Code Replication</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Code Replication</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-environment">Preparing the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-environment-for-python">1. Virtual Environment for Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-a-anaconda">1.1 Option A: Anaconda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-b-python-pip">1.1 Option B: Python PIP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-libraries">1.2 Install Required Libraries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-with-cuda">1.2.1 PyTorch with CUDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cudnn">1.2.2 CuDNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorflow">1.2.3 Tensorflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-libraries">1.2.4 Other libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">2. Containers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#singularity">2.1 Singularity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker">2.2 Docker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab">Google Colab</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-reproduce">How to Reproduce</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tft-pytorch">TFT-pytorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-requirement">Runtime Requirement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-interpretation">Training and Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="code-replication">
+<h1>Code Replication<a class="headerlink" href="#code-replication" title="Permalink to this heading">#</a></h1>
+<section id="preparing-the-environment">
+<h2>Preparing the Environment<a class="headerlink" href="#preparing-the-environment" title="Permalink to this heading">#</a></h2>
+<p>For the environment you can either prepare it from scratch or use the containers (both <code class="docutils literal notranslate"><span class="pre">docker</span></code> and <code class="docutils literal notranslate"><span class="pre">singularity</span></code>) we have already created.</p>
+</section>
+<section id="virtual-environment-for-python">
+<h2>1. Virtual Environment for Python<a class="headerlink" href="#virtual-environment-for-python" title="Permalink to this heading">#</a></h2>
+<p>First create a virtual environment with the required libraries. For example, to create an venv named <code class="docutils literal notranslate"><span class="pre">ml</span></code>, you can either use the <code class="docutils literal notranslate"><span class="pre">Anaconda</span></code> library or your locally installed <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+</section>
+<section id="option-a-anaconda">
+<h2>1.1 Option A: Anaconda<a class="headerlink" href="#option-a-anaconda" title="Permalink to this heading">#</a></h2>
+<p>If you have <code class="docutils literal notranslate"><span class="pre">Anaconda</span></code> installed locally, follow the instructions <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">here</a>. An example code,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">ml</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span> <span class="n">pip</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">ml</span>
+</pre></div>
+</div>
+<p>This will activate the venv <code class="docutils literal notranslate"><span class="pre">ml</span></code>.</p>
+</section>
+<section id="option-b-python-pip">
+<h2>1.1 Option B: Python PIP<a class="headerlink" href="#option-b-python-pip" title="Permalink to this heading">#</a></h2>
+<p>If you only have <code class="docutils literal notranslate"><span class="pre">python</span></code> installed but no <code class="docutils literal notranslate"><span class="pre">pip</span></code>, installed pip and activate a virtual env using the following commands from <a class="reference external" href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/">here</a>,</p>
+<p>On linux/macOS :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--upgrade<span class="w"> </span>pip
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>virtualenv
+python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>ml
+<span class="nb">source</span><span class="w"> </span>ml/bin/activate
+</pre></div>
+</div>
+<p>On windows :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+py<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>virtualenv
+py<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>ml
+.<span class="se">\e</span>nv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</pre></div>
+</div>
+<p>Follow the instructions <a class="reference external" href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/">here</a> to make sure you have the <code class="docutils literal notranslate"><span class="pre">pip</span></code> and <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> installed and working. Then create a virtual environement (e.g. name ml) or install required libraries in the default env.</p>
+</section>
+<section id="install-required-libraries">
+<h2>1.2 Install Required Libraries<a class="headerlink" href="#install-required-libraries" title="Permalink to this heading">#</a></h2>
+<p>Once you have the virtual environment created and running, you can download the libraries using, the requirement.txt file. If you have trouble installing from the file, try installing each of them manually.</p>
+<section id="pytorch-with-cuda">
+<h3>1.2.1 PyTorch with CUDA<a class="headerlink" href="#pytorch-with-cuda" title="Permalink to this heading">#</a></h3>
+<p>The default versions installed with <code class="docutils literal notranslate"><span class="pre">pytorch-forecasting</span></code> might not work and print cpu instead for the following code. Since it doesn’t install CUDA with pytorch.</p>
+<ol class="arabic simple">
+<li><p>Check if PyTorch is properly installed with CUDA or not. Running the following from the command like should show True.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import torch;print(torch.cuda.is_available())&quot;</span>
+</pre></div>
+</div>
+<p>You can also check using the following python code,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>If the previous step returns False, install the following version. Anything <a class="reference external" href="https://pytorch.org/get-started/locally">newer</a> doesn’t work with the <code class="docutils literal notranslate"><span class="pre">pytorch_forecasting</span></code> framework for now.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># source https://pytorch.org/get-started/previous-versions/#v1131</span>
+<span class="c1"># option 1. using anaconda</span>
+conda<span class="w"> </span>install<span class="w"> </span><span class="nv">pytorch</span><span class="o">==</span><span class="m">1</span>.13.1<span class="w"> </span>pytorch-cuda<span class="o">=</span><span class="m">11</span>.7<span class="w"> </span>-c<span class="w"> </span>pytorch<span class="w"> </span>-c<span class="w"> </span>nvidia
+
+<span class="c1"># option 2. using pip</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">1</span>.13.1+cu117<span class="w"> </span>-f<span class="w"> </span>https://download.pytorch.org/whl/torch_stable.html
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Recheck whether PyTorch and CUDA are properly installed using the step 1.</p></li>
+</ol>
+</section>
+<section id="cudnn">
+<h3>1.2.2 CuDNN<a class="headerlink" href="#cudnn" title="Permalink to this heading">#</a></h3>
+<p>This library is required for tensorflow to run on GPU. It can be manually installed following the instructions <a class="reference external" href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">here</a>. But not using <code class="docutils literal notranslate"><span class="pre">pip</span></code>. A more convenient way is to use anaconda:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
+</pre></div>
+</div>
+</section>
+<section id="tensorflow">
+<h3>1.2.3 Tensorflow<a class="headerlink" href="#tensorflow" title="Permalink to this heading">#</a></h3>
+<p>The detailed instructions for all OS and versions are <a class="reference external" href="https://www.tensorflow.org/install/pip">here</a>.For me a windows user, <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code> 2.10.0 is the last version installable by <code class="docutils literal notranslate"><span class="pre">windows</span> <span class="pre">native</span></code>. Later versions have to be installed by <code class="docutils literal notranslate"><span class="pre">wsl</span></code>. On <code class="docutils literal notranslate"><span class="pre">linux</span></code>, there is no major change. The following is for windows.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tensorflow</span><span class="o">==</span><span class="m">2</span>.10.*
+</pre></div>
+</div>
+<p>If you are running on <code class="docutils literal notranslate"><span class="pre">CPU</span></code>, move onto the next section. If using <code class="docutils literal notranslate"><span class="pre">GPU</span></code>, check if the <code class="docutils literal notranslate"><span class="pre">CuDNN</span></code> is properly installed. Tensorflow GPU is used in the related work benchmarking with LSTM and BiLSTM only. It isn’t required for the TFT. You can check using python,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or using command line,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import tensorflow as tf; print(tf.config.list_physical_devices(&#39;GPU&#39;))&quot;</span>
+</pre></div>
+</div>
+<p>If this returns an empty list or 0, you need to install it. Installing <code class="docutils literal notranslate"><span class="pre">cudnn</span></code> doesn’t work with pip, but <code class="docutils literal notranslate"><span class="pre">anaconda</span></code> works. It can also be manually installed following the instructions <a class="reference external" href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">here</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
+<span class="nb">set</span> <span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Recheck again if <code class="docutils literal notranslate"><span class="pre">tf.config.list_physical_devices('GPU')</span></code> returns a list of GPU devices.</p>
+</section>
+<section id="other-libraries">
+<h3>1.2.4 Other libraries<a class="headerlink" href="#other-libraries" title="Permalink to this heading">#</a></h3>
+<p>Install the rest of the libraries using <code class="docutils literal notranslate"><span class="pre">pip</span></code> and requirements.txt file. The requirement file has been updated to support the latest versions. The versions used during the study in the paper is in requirements_old.txt file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">pip</span></code> inside conda virtual environment actually installs the libraries on the global pip. Check this blog for more info <a class="reference external" href="https://www.anaconda.com/blog/using-pip-in-a-conda-environment">https://www.anaconda.com/blog/using-pip-in-a-conda-environment</a>. This can be unintended. But conda install fails to resolve the dependency conflicts. Hence couldn’t be used.</p>
+</div>
+<p>To install the other libraries from <code class="docutils literal notranslate"><span class="pre">pip</span></code> run the following commands. You can test whether the environment has been installed properly using a small dataset in the <code class="docutils literal notranslate"><span class="pre">train.py</span></code> file. The default configuration runs the training on top 100 US counties by population.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># On linux/macOS</span>
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># On windows</span>
+py<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="containers">
+<h2>2. Containers<a class="headerlink" href="#containers" title="Permalink to this heading">#</a></h2>
+<p>If you don’t want to setup the environment from scratch and would rather use contaier, use one of the following options.</p>
+</section>
+<section id="singularity">
+<h2>2.1 Singularity<a class="headerlink" href="#singularity" title="Permalink to this heading">#</a></h2>
+<p>You can either pull the singularity container from the remote library,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>singularity<span class="w"> </span>pull<span class="w"> </span>tft_pytorch.sif<span class="w"> </span>library://khairulislam/collection/tft_pytorch:latest
+</pre></div>
+</div>
+<p>Or create the container locally using the singularity.def file. Executeg the following command. This uses the definition file to create the container from scratch. Note that is uses <code class="docutils literal notranslate"><span class="pre">sudo</span></code> and requires root privilege. After compilation, you’ll get a container named <code class="docutils literal notranslate"><span class="pre">tft_pytorch.sif</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>singularity<span class="w"> </span>build<span class="w"> </span>tft_pytorch.sif<span class="w"> </span>singularity.def
+</pre></div>
+</div>
+<p>Then you can use the container to run the scripts. For example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>original-TFT-baseline/script/
+
+singularity<span class="w"> </span>run<span class="w"> </span>--nv<span class="w"> </span>../../tft_pytorch.sif<span class="w"> </span>python<span class="w"> </span>train.py<span class="w"> </span>--config<span class="o">=</span>baseline.json<span class="w"> </span>--output<span class="o">=</span>../scratch/TFT_baseline
+</pre></div>
+</div>
+</section>
+<section id="docker">
+<h2>2.2 Docker<a class="headerlink" href="#docker" title="Permalink to this heading">#</a></h2>
+<p>Dockerfile contains the docker buidling definitions. You can build the container using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">tft_pytorch</span>
+</pre></div>
+</div>
+<p>This creates a container with name tag tft_pytorch. The run our scripts inside the container.</p>
+</section>
+<section id="google-colab">
+<h2>Google Colab<a class="headerlink" href="#google-colab" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Recent trials (June, 23) with colab has shown it keeps failing with the version changes. And doesn’t install the pytorch_forecasting properly.</p>
+</div>
+<p>If you are running on <strong>Google colab</strong>, most libraries are already installed there. You’ll only have to install the pytorch forecasting and lightning module. Add the following installation commands in the code. Upload the <code class="docutils literal notranslate"><span class="pre">TFT-pytorch</span></code> folder in your drive and set that filepaths accordingly.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install pytorch_lightning==1.8.6
+!pip install pytorch_forecasting==0.10.3
+</pre></div>
+</div>
+<p>If you want to run the data preparation notebook, upload the CovidMay17-2022 folder too. Modify the paths accordingly in the notebook.</p>
+<p>Load your drive and <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the folder,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+ <span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">drive</span><span class="o">/</span><span class="n">My</span> <span class="n">Drive</span><span class="o">/</span><span class="n">gpce</span><span class="o">-</span><span class="n">covid</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-reproduce">
+<h1>How to Reproduce<a class="headerlink" href="#how-to-reproduce" title="Permalink to this heading">#</a></h1>
+<p>If the environment is ready, you can use the Related Works folder to reproduce the baseline models we compared our TFT-model performance with. And the TFT-pytorch folder to reproduce the TFT-model training and interpretation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In case of scripts, run them from the same directory they are in. This is due to using relative imports for the other modules in the project.</p>
+</div>
+<p>Running from the same directory helps python finding the modules paths in parent folders. Notebooks are run from the same folder anyway, so this won’t be an issue for them.</p>
+<section id="tft-pytorch">
+<h2>TFT-pytorch<a class="headerlink" href="#tft-pytorch" title="Permalink to this heading">#</a></h2>
+<section id="runtime-requirement">
+<h3>Runtime Requirement<a class="headerlink" href="#runtime-requirement" title="Permalink to this heading">#</a></h3>
+<p>You need at least <code class="docutils literal notranslate"><span class="pre">32</span> <span class="pre">GB</span> <span class="pre">RAM</span> <span class="pre">memory</span></code> to train the full dataset (<code class="docutils literal notranslate"><span class="pre">Total.csv</span></code>, which isn’t uploaded in git, but you can create using the previous step). Each epoch will take approx 40-50 minutes.</p>
+<p>But top 100 and 500 counties (<code class="docutils literal notranslate"><span class="pre">Top_100.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">Top_500.csv</span></code> in the <code class="docutils literal notranslate"><span class="pre">2022_May_cleaned</span></code> folder) will run fine within <code class="docutils literal notranslate"><span class="pre">16</span> <span class="pre">GB</span> <span class="pre">memory</span></code>. Each epoch takes 2-4 minutes for top 100 and 5-10 minutes for top 500.</p>
+</section>
+<section id="training-and-interpretation">
+<h3>Training and Interpretation<a class="headerlink" href="#training-and-interpretation" title="Permalink to this heading">#</a></h3>
+<p>The training can be done using either <code class="docutils literal notranslate"><span class="pre">train.py</span></code> or ``train_simple.py<code class="docutils literal notranslate"><span class="pre">script.</span></code>train.py<code class="docutils literal notranslate"><span class="pre">interprets</span> <span class="pre">the</span> <span class="pre">trained</span> <span class="pre">model,</span> <span class="pre">when</span></code>train_simple.py<code class="docutils literal notranslate"><span class="pre">only</span> <span class="pre">does</span> <span class="pre">the</span> <span class="pre">training.</span> <span class="pre">Move</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">scripts</span> <span class="pre">folder</span> <span class="pre">and</span> <span class="pre">run</span></code>python train.py` to run the tft training.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpce</span><span class="o">-</span><span class="n">covid</span>\<span class="n">TFT</span><span class="o">-</span><span class="n">pytorch</span>\<span class="n">script</span><span class="o">&gt;</span> <span class="n">python</span> <span class="o">.</span>\<span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">Using</span> <span class="n">cuda</span> <span class="n">backend</span><span class="o">.</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">config</span> <span class="n">CONFIG</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">input_file</span> <span class="n">INPUT_FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">output</span> <span class="n">OUTPUT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">progress</span><span class="p">]</span>
+
+<span class="n">Train</span> <span class="n">TFT</span> <span class="n">model</span>
+
+<span class="n">options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">--</span><span class="n">config</span> <span class="n">CONFIG</span>       <span class="n">config</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">configurations</span> <span class="n">folder</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">baseline</span><span class="o">.</span><span class="n">json</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">input_file</span> <span class="n">INPUT_FILE</span>
+                        <span class="n">path</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">input</span> <span class="n">feature</span> <span class="n">file</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="o">../</span><span class="mi">2022</span><span class="n">_May_cleaned</span><span class="o">/</span><span class="n">Top_100</span><span class="o">.</span><span class="n">csv</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">output</span> <span class="n">OUTPUT</span>       <span class="n">output</span> <span class="n">result</span> <span class="n">folder</span><span class="o">.</span> <span class="n">Anything</span> <span class="n">written</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">scratch</span> <span class="n">folder</span> <span class="n">will</span> <span class="n">be</span> <span class="n">ignored</span> <span class="n">by</span> <span class="n">Git</span><span class="o">.</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="o">../</span><span class="n">scratch</span><span class="o">/</span><span class="n">TFT_baseline</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">progress</span>       <span class="n">show</span> <span class="n">the</span> <span class="n">progress</span> <span class="n">bar</span><span class="o">.</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similary, the <code class="docutils literal notranslate"><span class="pre">inference.py</span></code> can be used to make model predictions and interpretation on the predicted values. The scripts also have their notebook counterparts in the <code class="docutils literal notranslate"><span class="pre">notebook</span></code> folder.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.sh</span></code> files are for submitting job requests on remove servers (<code class="docutils literal notranslate"><span class="pre">Rivanna</span></code> or <code class="docutils literal notranslate"><span class="pre">CS</span></code>). If you are submitting on Rivanna, make sure you are added to the accounts. Model <code class="docutils literal notranslate"><span class="pre">tuning</span></code> was done by manually changing the configurations and submitting jobs.</p>
+<p>Visualzing the predictions and interpretations are partially done by some of the other notebooks in the notebooks folder.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./pages"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="FeatureImportance.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Feature Importance</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Related-Work-Conclusion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Related Work and Conclusions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Code Replication</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-environment">Preparing the Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-environment-for-python">1. Virtual Environment for Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-a-anaconda">1.1 Option A: Anaconda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-b-python-pip">1.1 Option B: Python PIP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-libraries">1.2 Install Required Libraries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-with-cuda">1.2.1 PyTorch with CUDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cudnn">1.2.2 CuDNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorflow">1.2.3 Tensorflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-libraries">1.2.4 Other libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#containers">2. Containers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#singularity">2.1 Singularity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker">2.2 Docker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-colab">Google Colab</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-reproduce">How to Reproduce</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tft-pytorch">TFT-pytorch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-requirement">Runtime Requirement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-interpretation">Training and Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By UVA MLSys
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
