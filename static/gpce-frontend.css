@@ -26,6 +26,31 @@
     width: 1200px;
   }
 
+  #interactive p{
+    font-size: 19px;
+    text-align: left;
+    max-width: 900px;
+    color:black
+  }
+
+  .county-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+  }
+  
+  .tab-group {
+    display: flex;
+  }
+  
+  .tab-group > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+
+
+
 
 
 
@@ -130,6 +155,8 @@
     height: 2000px;
   }
 
+
+
   #DATA{
     height: 900px;
   }
@@ -139,3 +166,34 @@
     padding: 0;
     text-align: center;
   }
+
+  #interactive{
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+
+  .tab-group button{
+    width: 200px;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #464c53;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Active Effect */
+  .tab-group button.active {
+    background-color: #cbd7e4;
+    color: #464c53;
+  }
+  .tab-group button:hover {
+    background-color: #cbd7e4;
+    color: #464c53;
+  }
+  
+  

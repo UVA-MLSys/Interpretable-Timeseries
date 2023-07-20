@@ -299,7 +299,7 @@ def index():
 
     fig2 = go.Figure(data=[trace] + dashed_lines, layout=layout)
     graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template("GPCE-frontend.html", graphJSON=graphJSON, graph2JSON=graph2JSON)
+    return render_template("GPCE-frontend.html")
 
 
 

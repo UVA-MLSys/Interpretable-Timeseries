@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <style>
+  .dot {
+      fill: steelblue;
+      r: 5;
+    }
+  </style>
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var sections = document.querySelectorAll('section');
@@ -54,10 +59,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel = "stylesheet" href="static/gpce-frontend.css">
   <link href='https://fonts.googleapis.com/css2?family=Lora&display=swap'rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="static/test.js"> </script>
 
 </head>
 <body>
@@ -131,6 +136,7 @@
       <img src="static/Benchmark.png" >
       <img src="static/Ground-Truth.png" >
     </div>
+  
   </section>
 
   <section id="INTERPRETATION">
@@ -138,12 +144,29 @@
     <p> Time Series Data typically exhibits temporal pattern such as trend, cyclic, and seasonal pattern. And our proposed TFT are able to detect such patterns. 
       Below are two interactive plots that respectively demonstrates cyclic holiday pattern and weekly seasonal pattern.
     </p>
-    <div id="chart" class="chart" style="width: 1000px">
-    <div id="chart2" class="chart2" style="width: 1000px"></div>
+
+    <div id="interactive" style="width: 80%; background-color: white; height: 1400px">
+      <p>Click different county buttons to see how our model captures spatial patterns across urban and rural counties in six different States.</p>
+      <div class="county-grid">
+        <div class="tab-group">
+          <div id="county-tab-urban">
+            <button id="SaltLake" onclick="updateLineGraph('SaltLake')">Salt Lake</button>
+            <button id="Hillsborough" onclick="updateLineGraph('Hillsborough')">Hillsborough</button>
+            <button id="Multnomah" onclick="updateLineGraph('Multnomah')">Multnomah</button>
+          </div>
+        </div>
+        <div class="tab-group">
+          <div id="county-tab-rural">
+            <button id="Brunswick" onclick="updateLineGraph('Brunswick')">Brunswick</button>
+            <button id="Yancey" onclick="updateLineGraph('Yancey')">Yancey</button>
+            <button id="Ogemaw" onclick="updateLineGraph('Ogemaw')">Ogemaw</button>
+          </div>
+        </div>
+      </div>
+      <svg id="d3-interactive"></svg>
     </div>
+    <script> console.log(svg)</script>
   </section>
-
-
 
 
   <section id="TEAM">
@@ -153,14 +176,8 @@
     </div>
   </section>
 
+
+
 </body>
-
-<script type="text/javascript">
-  var graphs = {{graphJSON | safe }} ;
-  Plotly.plot("chart", graphs, {});
-  var graph2 = {{graph2JSON | safe }}
-  Plotly.plot("chart2", graph2, {})
-</script>
-
 </html>
 
