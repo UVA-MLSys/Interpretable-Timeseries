@@ -1,395 +1,917 @@
-
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en">
 
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<head>
+  <style>
+    .bd-footer-content noprint{
+      --pst-header-height: 4rem;
+      --pst-header-article-height: calc(var(--pst-header-height)*2/3);
+      --pst-sidebar-secondary: 17rem;
+      --pst-font-size-h1: 2.5rem;
+      --pst-font-size-h2: 2rem;
+      --pst-font-size-h3: 1.75rem;
+      --pst-font-size-h4: 1.5rem;
+      --pst-font-size-h5: 1.25rem;
+      --pst-font-size-h6: 1.1rem;
+      --pst-font-size-milli: 0.9rem;
+      --pst-sidebar-font-size: 0.9rem;
+      --pst-sidebar-font-size-mobile: 1.1rem;
+      --pst-sidebar-header-font-size: 1.2rem;
+      --pst-sidebar-header-font-weight: 600;
+      --pst-admonition-font-weight-heading: 600;
+      --pst-font-weight-caption: 300;
+      --pst-font-weight-heading: 400;
+      --pst-font-family-base-system: -apple-system,BlinkMacSystemFont,Segoe UI,"Helvetica Neue",Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      --pst-font-family-monospace-system: "SFMono-Regular",Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;
+      --pst-font-family-base: var(--pst-font-family-base-system);
+      --pst-font-family-heading: var(--pst-font-family-base-system);
+      --pst-font-family-monospace: var(--pst-font-family-monospace-system);
+      --pst-font-size-icon: 1.5rem;
+      --pst-icon-check-circle: "";
+      --pst-icon-info-circle: "";
+      --pst-icon-exclamation-triangle: "";
+      --pst-icon-exclamation-circle: "";
+      --pst-icon-times-circle: "";
+      --pst-icon-lightbulb: "";
+      --pst-icon-download: "";
+      --pst-icon-angle-left: "";
+      --pst-icon-angle-right: "";
+      --pst-icon-external-link: "";
+      --pst-icon-search-minus: "";
+      --pst-icon-github: "";
+      --pst-icon-gitlab: "";
+      --pst-icon-share: "";
+      --pst-icon-bell: "";
+      --pst-icon-pencil: "";
+      --pst-breadcrumb-divider: "";
+      --pst-icon-admonition-default: var(--pst-icon-bell);
+      --pst-icon-admonition-note: var(--pst-icon-info-circle);
+      --pst-icon-admonition-attention: var(--pst-icon-exclamation-circle);
+      --pst-icon-admonition-caution: var(--pst-icon-exclamation-triangle);
+      --pst-icon-admonition-warning: var(--pst-icon-exclamation-triangle);
+      --pst-icon-admonition-danger: var(--pst-icon-exclamation-triangle);
+      --pst-icon-admonition-error: var(--pst-icon-times-circle);
+      --pst-icon-admonition-hint: var(--pst-icon-lightbulb);
+      --pst-icon-admonition-tip: var(--pst-icon-lightbulb);
+      --pst-icon-admonition-important: var(--pst-icon-exclamation-circle);
+      --pst-icon-admonition-seealso: var(--pst-icon-share);
+      --pst-icon-admonition-todo: var(--pst-icon-pencil);
+      --pst-icon-versionmodified-default: var(--pst-icon-exclamation-circle);
+      --pst-icon-versionmodified-added: var(--pst-icon-exclamation-circle);
+      --pst-icon-versionmodified-changed: var(--pst-icon-exclamation-circle);
+      --pst-icon-versionmodified-deprecated: var(--pst-icon-exclamation-circle);
+      --pst-font-size-base: none;
+      --bs-blue: #0d6efd;
+      --bs-indigo: #6610f2;
+      --bs-purple: #6f42c1;
+      --bs-pink: #d63384;
+      --bs-red: #dc3545;
+      --bs-orange: #fd7e14;
+      --bs-yellow: #ffc107;
+      --bs-green: #198754;
+      --bs-teal: #20c997;
+      --bs-cyan: #0dcaf0;
+      --bs-black: #000;
+      --bs-white: #fff;
+      --bs-gray: #6c757d;
+      --bs-gray-dark: #343a40;
+      --bs-gray-100: #f8f9fa;
+      --bs-gray-200: #e9ecef;
+      --bs-gray-300: #dee2e6;
+      --bs-gray-400: #ced4da;
+      --bs-gray-500: #adb5bd;
+      --bs-gray-600: #6c757d;
+      --bs-gray-700: #495057;
+      --bs-gray-800: #343a40;
+      --bs-gray-900: #212529;
+      --bs-primary: #0d6efd;
+      --bs-secondary: #6c757d;
+      --bs-success: #198754;
+      --bs-info: #0dcaf0;
+      --bs-warning: #ffc107;
+      --bs-danger: #dc3545;
+      --bs-light: #f8f9fa;
+      --bs-dark: #212529;
+      --bs-primary-rgb: 13,110,253;
+      --bs-secondary-rgb: 108,117,125;
+      --bs-success-rgb: 25,135,84;
+      --bs-info-rgb: 13,202,240;
+      --bs-warning-rgb: 255,193,7;
+      --bs-danger-rgb: 220,53,69;
+      --bs-light-rgb: 248,249,250;
+      --bs-dark-rgb: 33,37,41;
+      --bs-white-rgb: 255,255,255;
+      --bs-black-rgb: 0,0,0;
+      --bs-body-color-rgb: 33,37,41;
+      --bs-body-bg-rgb: 255,255,255;
+      --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+      --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      --bs-gradient: linear-gradient(180deg,hsla(0,0%,100%,.15),hsla(0,0%,100%,0));
+      --bs-body-font-family: var(--bs-font-sans-serif);
+      --bs-body-font-size: 1rem;
+      --bs-body-font-weight: 400;
+      --bs-body-line-height: 1.5;
+      --bs-body-color: #212529;
+      --bs-body-bg: #fff;
+      --bs-border-width: 1px;
+      --bs-border-style: solid;
+      --bs-border-color: #dee2e6;
+      --bs-border-color-translucent: rgba(0,0,0,.175);
+      --bs-border-radius: 0.375rem;
+      --bs-border-radius-sm: 0.25rem;
+      --bs-border-radius-lg: 0.5rem;
+      --bs-border-radius-xl: 1rem;
+      --bs-border-radius-2xl: 2rem;
+      --bs-border-radius-pill: 50rem;
+      --bs-link-color: #0d6efd;
+      --bs-link-hover-color: #0a58ca;
+      --bs-code-color: #d63384;
+      --bs-highlight-bg: #fff3cd;
+      --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+      --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+      --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+      --mystnb-source-bg-color: #f7f7f7;
+      --mystnb-stdout-bg-color: #fcfcfc;
+      --mystnb-stderr-bg-color: #fdd;
+      --mystnb-traceback-bg-color: #fcfcfc;
+      --mystnb-source-border-color: #ccc;
+      --mystnb-source-margin-color: green;
+      --mystnb-stdout-border-color: #f7f7f7;
+      --mystnb-stderr-border-color: #f7f7f7;
+      --mystnb-traceback-border-color: #ffd6d6;
+      --mystnb-hide-prompt-opacity: 70%;
+      --mystnb-source-border-radius: .4em;
+      --mystnb-source-border-width: 1px;
+      --sd-color-shadow: rgba(0, 0, 0, 0.15);
+      --sd-color-card-border-hover: hsla(231, 99%, 66%, 1);
+      --sd-color-card-background: transparent;
+      --sd-color-card-text: inherit;
+      --sd-color-card-header: transparent;
+      --sd-color-card-footer: transparent;
+      --sd-color-tabs-label-active: hsla(231, 99%, 66%, 1);
+      --sd-color-tabs-label-hover: hsla(231, 99%, 66%, 1);
+      --sd-color-tabs-label-inactive: hsl(0, 0%, 66%);
+      --sd-color-tabs-underline-active: hsla(231, 99%, 66%, 1);
+      --sd-color-tabs-underline-hover: rgba(178, 206, 245, 0.62);
+      --sd-color-tabs-underline-inactive: transparent;
+      --sd-color-tabs-overline: rgb(222, 222, 222);
+      --sd-color-tabs-underline: rgb(222, 222, 222);
+      --sd-fontsize-tabs-label: 1rem;
+      --pst-color-attention: #ffc107;
+      --pst-color-text-base: #323232;
+      --pst-color-text-muted: #646464;
+      --pst-color-shadow: #d8d8d8;
+      --pst-color-border: #c9c9c9;
+      --pst-color-inline-code: #e83e8c;
+      --pst-color-target: #fbe54e;
+      --pst-color-background: #fff;
+      --pst-color-on-background: #fff;
+      --pst-color-surface: #f5f5f5;
+      --pst-color-on-surface: #e1e1e1;
+      --pst-color-link: var(--pst-color-primary);
+      --pst-color-link-hover: var(--pst-color-warning);
+      --pst-color-primary-text: #fff;
+      --pst-color-primary-highlight: #306e81;
+      --sd-color-primary: var(--pst-color-primary);
+      --sd-color-primary-text: var(--pst-color-primary-text);
+      --sd-color-primary-highlight: var(--pst-color-primary-highlight);
+      --pst-color-secondary: #ee9040;
+      --pst-color-secondary-text: #fff;
+      --pst-color-secondary-highlight: #cf6912;
+      --sd-color-secondary: var(--pst-color-secondary);
+      --sd-color-secondary-text: var(--pst-color-secondary-text);
+      --sd-color-secondary-highlight: var(--pst-color-secondary-highlight);
+      --pst-color-success: #28a745;
+      --pst-color-success-text: #fff;
+      --pst-color-success-highlight: #19692c;
+      --sd-color-success: var(--pst-color-success);
+      --sd-color-success-text: var(--pst-color-success-text);
+      --sd-color-success-highlight: var(--pst-color-success-highlight);
+      --pst-color-info: #459db9;
+      --pst-color-info-text: #fff;
+      --pst-color-info-highlight: #306e81;
+      --sd-color-info: var(--pst-color-info);
+      --sd-color-info-text: var(--pst-color-info-text);
+      --sd-color-info-highlight: var(--pst-color-info-highlight);
+      --pst-color-warning: #ee9040;
+      --pst-color-warning-text: #fff;
+      --pst-color-warning-highlight: #cf6912;
+      --sd-color-warning: var(--pst-color-warning);
+      --sd-color-warning-text: var(--pst-color-warning-text);
+      --sd-color-warning-highlight: var(--pst-color-warning-highlight);
+      --pst-color-danger: #dc3545;
+      --pst-color-danger-text: #fff;
+      --pst-color-danger-highlight: #a71d2a;
+      --sd-color-danger: var(--pst-color-danger);
+      --sd-color-danger-text: var(--pst-color-danger-text);
+      --sd-color-danger-highlight: var(--pst-color-danger-highlight);
+      --pst-color-light: #c9c9c9;
+      --pst-color-light-text: #000;
+      --pst-color-light-highlight: #a3a3a3;
+      --sd-color-light: var(--pst-color-light);
+      --sd-color-light-text: var(--pst-color-light-text);
+      --sd-color-light-highlight: var(--pst-color-light-highlight);
+      --pst-color-muted: #646464;
+      --pst-color-muted-text: #fff;
+      --pst-color-muted-highlight: #3e3e3e;
+      --sd-color-muted: var(--pst-color-muted);
+      --sd-color-muted-text: var(--pst-color-muted-text);
+      --sd-color-muted-highlight: var(--pst-color-muted-highlight);
+      --pst-color-dark: #323232;
+      --pst-color-dark-text: #fff;
+      --pst-color-dark-highlight: #0c0c0c;
+      --sd-color-dark: var(--pst-color-dark);
+      --sd-color-dark-text: var(--pst-color-dark-text);
+      --sd-color-dark-highlight: var(--pst-color-dark-highlight);
+      --pst-color-black: #000;
+      --pst-color-black-text: #fff;
+      --pst-color-black-highlight: #000;
+      --sd-color-black: var(--pst-color-black);
+      --sd-color-black-text: var(--pst-color-black-text);
+      --sd-color-black-highlight: var(--pst-color-black-highlight);
+      --pst-color-white: #fff;
+      --pst-color-white-text: #000;
+      --pst-color-white-highlight: #d9d9d9;
+      --sd-color-white: var(--pst-color-white);
+      --sd-color-white-text: var(--pst-color-white-text);
+      --sd-color-white-highlight: var(--pst-color-white-highlight);
+      --sd-color-card-border: var(--pst-color-border);
+      --sbt-color-announcement: #616161;
+      --pst-color-primary: #579aca;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      text-align: var(--bs-body-text-align);
+      color: var(--pst-color-text-base);
+      font-family: var(--pst-font-family-base);
+      font-weight: 400;
+      line-height: 1.65;
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 15px;
+      border-top: 1px solid #ccc;
+      font-size: 87.5%;
+    }
+    .bd-footer-article {
+      --pst-header-height: 4rem;
+      --pst-header-article-height: calc(var(--pst-header-height)*2/3);
+      --pst-sidebar-secondary: 17rem;
+      --pst-font-size-h1: 2.5rem;
+      --pst-font-size-h2: 2rem;
+      --pst-font-size-h3: 1.75rem;
+      --pst-font-size-h4: 1.5rem;
+      --pst-font-size-h5: 1.25rem;
+      --pst-font-size-h6: 1.1rem;
+      --pst-font-size-milli: 0.9rem;
+      --pst-sidebar-font-size: 0.9rem;
+      --pst-sidebar-font-size-mobile: 1.1rem;
+      --pst-sidebar-header-font-size: 1.2rem;
+      --pst-sidebar-header-font-weight: 600;
+      --pst-admonition-font-weight-heading: 600;
+      --pst-font-weight-caption: 300;
+      --pst-font-weight-heading: 400;
+      --pst-font-family-base-system: -apple-system, BlinkMacSystemFont, Segoe UI, "Helvetica Neue", Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+      --pst-font-family-monospace-system: "SFMono-Regular", Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+      --pst-font-family-base: var(--pst-font-family-base-system);
+      --pst-font-family-heading: var(--pst-font-family-base-system);
+      --pst-font-family-monospace: var(--pst-font-family-monospace-system);
+      --pst-font-size-icon: 1.5rem;
+      --pst-icon-check-circle: "";
+      --pst-icon-info-circle: "";
+      --pst-icon-exclamation-triangle: "";
+      --pst-icon-exclamation-circle: "";
+      --pst-icon-times-circle: "";
+      --pst-icon-lightbulb: "";
+      --pst-icon-download: "";
+      --pst-icon-angle-left: "";
+      --pst-icon-angle-right: "";
+      --pst-icon-external-link: "";
+      --pst-icon-search-minus: "";
+      --pst-icon-github: "";
+      --pst-icon-gitlab: "";
+      --pst-icon-share: "";
+      --pst-icon-bell: "";
+      --pst-icon-pencil: "";
+      --pst-breadcrumb-divider: "";
+      --pst-icon-admonition-default: var(--pst-icon-bell);
+      --pst-icon-admonition-note: var(--pst-icon-info-circle);
+      --pst-icon-admonition-attention: var(--pst-icon-exclamation-circle);
+      --pst-icon-admonition-caution: var(--pst-icon-exclamation-triangle);
+      --pst-icon-admonition-warning: var(--pst-icon-exclamation-triangle);
+      --pst-icon-admonition-danger: var(--pst-icon-exclamation-triangle);
+      --pst-icon-admonition-error: var(--pst-icon-times-circle);
+      --pst-icon-admonition-hint: var(--pst-icon-lightbulb);
+      --pst-icon-admonition-tip: var(--pst-icon-lightbulb);
+      --pst-icon-admonition-important: var(--pst-icon-exclamation-circle);
+      --pst-icon-admonition-seealso: var(--pst-icon-share);
+      --pst-icon-admonition-todo: var(--pst-icon-pencil);
+      --pst-icon-versionmodified-default: var(--pst-icon-exclamation-circle);
+      --pst-icon-versionmodified-added: var(--pst-icon-exclamation-circle);
+      --pst-icon-versionmodified-changed: var(--pst-icon-exclamation-circle);
+      --pst-icon-versionmodified-deprecated: var(--pst-icon-exclamation-circle);
+      --pst-font-size-base: none;
+      --bs-blue: #0d6efd;
+      --bs-indigo: #6610f2;
+      --bs-purple: #6f42c1;
+      --bs-pink: #d63384;
+      --bs-red: #dc3545;
+      --bs-orange: #fd7e14;
+      --bs-yellow: #ffc107;
+      --bs-green: #198754;
+      --bs-teal: #20c997;
+      --bs-cyan: #0dcaf0;
+      --bs-black: #000;
+      --bs-white: #fff;
+      --bs-gray: #6c757d;
+      --bs-gray-dark: #343a40;
+      --bs-gray-100: #f8f9fa;
+      --bs-gray-200: #e9ecef;
+      --bs-gray-300: #dee2e6;
+      --bs-gray-400: #ced4da;
+      --bs-gray-500: #adb5bd;
+      --bs-gray-600: #6c757d;
+      --bs-gray-700: #495057;
+      --bs-gray-800: #343a40;
+      --bs-gray-900: #212529;
+      --bs-primary: #0d6efd;
+      --bs-secondary: #6c757d;
+      --bs-success: #198754;
+      --bs-info: #0dcaf0;
+      --bs-warning: #ffc107;
+      --bs-danger: #dc3545;
+      --bs-light: #f8f9fa;
+      --bs-dark: #212529;
+      --bs-primary-rgb: 13, 110, 253;
+      --bs-secondary-rgb: 108, 117, 125;
+      --bs-success-rgb: 25, 135, 84;
+      --bs-info-rgb: 13, 202, 240;
+      --bs-warning-rgb: 255, 193, 7;
+      --bs-danger-rgb: 220, 53, 69;
+      --bs-light-rgb: 248, 249, 250;
+      --bs-dark-rgb: 33, 37, 41;
+      --bs-white-rgb: 255, 255, 255;
+      --bs-black-rgb: 0, 0, 0;
+      --bs-body-color-rgb: 33, 37, 41;
+      --bs-body-bg-rgb: 255, 255, 255;
+      --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --bs-gradient: linear-gradient(180deg, hsla(0, 0%, 100%, .15), hsla(0, 0%, 100%, 0));
+      --bs-body-font-family: var(--bs-font-sans-serif);
+      --bs-body-font-size: 1rem;
+      --bs-body-font-weight: 400;
+      --bs-body-line-height: 1.5;
+      --bs-body-color: #212529;
+      --bs-body-bg: #fff;
+      --bs-border-width: 1px;
+      --bs-border-style: solid;
+      --bs-border-color: #dee2e6;
+      --bs-border-color-translucent: rgba(0, 0, 0, .175);
+      --bs-border-radius: 0.375rem;
+      --bs-border-radius-sm: 0.25rem;
+      --bs-border-radius-lg: 0.5rem;
+      --bs-border-radius-xl: 1rem;
+      --bs-border-radius-2xl: 2rem;
+      --bs-border-radius-pill: 50rem;
+      --bs-link-color: #0d6efd;
+      --bs-link-hover-color: #0a58ca;
+      --bs-code-color: #d63384;
+      --bs-highlight-bg: #fff3cd;
+      --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+      --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+      --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+      --mystnb-source-bg-color: #f7f7f7;
+      --mystnb-stdout-bg-color: #fcfcfc;
+      --mystnb-stderr-bg-color: #fdd;
+      --mystnb-traceback-bg-color: #fcfcfc;
+      --mystnb-source-border-color: #ccc;
+      --mystnb-source-margin-color: green;
+      --mystnb-stdout-border-color: #f7f7f7;
+      --mystnb-stderr-border-color: #f7f7f7;
+      --mystnb-traceback-border-color: #ffd6d6;
+      --mystnb-hide-prompt-opacity: 70%;
+      --mystnb-source-border-radius: .4em;
+      --mystnb-source-border-width: 1px;
+      --sd-color-shadow: rgba(0, 0, 0, 0.15);
+      --sd-color-card-border-hover: hsla(231, 99%, 66%, 1);
+      --sd-color-card-background: transparent;
+      --sd-color-card-text: inherit;
+      --sd-color-card-header: transparent;
+      --sd-color-card-footer: transparent;
+      --sd-color-tabs-label-active: hsla(231, 99%, 66%, 1);
+      --sd-color-tabs-label-hover: hsla(231, 99%, 66%, 1);
+      --sd-color-tabs-label-inactive: hsl(0, 0%, 66%);
+      --sd-color-tabs-underline-active: hsla(231, 99%, 66%, 1);
+      --sd-color-tabs-underline-hover: rgba(178, 206, 245, 0.62);
+      --sd-color-tabs-underline-inactive: transparent;
+      --sd-color-tabs-overline: rgb(222, 222, 222);
+      --sd-color-tabs-underline: rgb(222, 222, 222);
+      --sd-fontsize-tabs-label: 1rem;
+      --pst-color-attention: #ffc107;
+      --pst-color-text-base: #323232;
+      --pst-color-text-muted: #646464;
+      --pst-color-shadow: #d8d8d8;
+      --pst-color-border: #c9c9c9;
+      --pst-color-inline-code: #e83e8c;
+      --pst-color-target: #fbe54e;
+      --pst-color-background: #fff;
+      --pst-color-on-background: #fff;
+      --pst-color-surface: #f5f5f5;
+      --pst-color-on-surface: #e1e1e1;
+      --pst-color-link: var(--pst-color-primary);
+      --pst-color-link-hover: var(--pst-color-warning);
+      --pst-color-primary-text: #fff;
+      --pst-color-primary-highlight: #306e81;
+      --sd-color-primary: var(--pst-color-primary);
+      --sd-color-primary-text: var(--pst-color-primary-text);
+      --sd-color-primary-highlight: var(--pst-color-primary-highlight);
+      --pst-color-secondary: #ee9040;
+      --pst-color-secondary-text: #fff;
+      --pst-color-secondary-highlight: #cf6912;
+      --sd-color-secondary: var(--pst-color-secondary);
+      --sd-color-secondary-text: var(--pst-color-secondary-text);
+      --sd-color-secondary-highlight: var(--pst-color-secondary-highlight);
+      --pst-color-success: #28a745;
+      --pst-color-success-text: #fff;
+      --pst-color-success-highlight: #19692c;
+      --sd-color-success: var(--pst-color-success);
+      --sd-color-success-text: var(--pst-color-success-text);
+      --sd-color-success-highlight: var(--pst-color-success-highlight);
+      --pst-color-info: #459db9;
+      --pst-color-info-text: #fff;
+      --pst-color-info-highlight: #306e81;
+      --sd-color-info: var(--pst-color-info);
+      --sd-color-info-text: var(--pst-color-info-text);
+      --sd-color-info-highlight: var(--pst-color-info-highlight);
+      --pst-color-warning: #ee9040;
+      --pst-color-warning-text: #fff;
+      --pst-color-warning-highlight: #cf6912;
+      --sd-color-warning: var(--pst-color-warning);
+      --sd-color-warning-text: var(--pst-color-warning-text);
+      --sd-color-warning-highlight: var(--pst-color-warning-highlight);
+      --pst-color-danger: #dc3545;
+      --pst-color-danger-text: #fff;
+      --pst-color-danger-highlight: #a71d2a;
+      --sd-color-danger: var(--pst-color-danger);
+      --sd-color-danger-text: var(--pst-color-danger-text);
+      --sd-color-danger-highlight: var(--pst-color-danger-highlight);
+      --pst-color-light: #c9c9c9;
+      --pst-color-light-text: #000;
+      --pst-color-light-highlight: #a3a3a3;
+      --sd-color-light: var(--pst-color-light);
+      --sd-color-light-text: var(--pst-color-light-text);
+      --sd-color-light-highlight: var(--pst-color-light-highlight);
+      --pst-color-muted: #646464;
+      --pst-color-muted-text: #fff;
+      --pst-color-muted-highlight: #3e3e3e;
+      --sd-color-muted: var(--pst-color-muted);
+      --sd-color-muted-text: var(--pst-color-muted-text);
+      --sd-color-muted-highlight: var(--pst-color-muted-highlight);
+      --pst-color-dark: #323232;
+      --pst-color-dark-text: #fff;
+      --pst-color-dark-highlight: #0c0c0c;
+      --sd-color-dark: var(--pst-color-dark);
+      --sd-color-dark-text: var(--pst-color-dark-text);
+      --sd-color-dark-highlight: var(--pst-color-dark-highlight);
+      --pst-color-black: #000;
+      --pst-color-black-text: #fff;
+      --pst-color-black-highlight: #000;
+      --sd-color-black: var(--pst-color-black);
+      --sd-color-black-text: var(--pst-color-black-text);
+      --sd-color-black-highlight: var(--pst-color-black-highlight);
+      --pst-color-white: #fff;
+      --pst-color-white-text: #000;
+      --pst-color-white-highlight: #d9d9d9;
+      --sd-color-white: var(--pst-color-white);
+      --sd-color-white-text: var(--pst-color-white-text);
+      --sd-color-white-highlight: var(--pst-color-white-highlight);
+      --sd-color-card-border: var(--pst-color-border);
+      --sbt-color-announcement: #616161;
+      --pst-color-primary: #579aca;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      text-align: var(--bs-body-text-align);
+      color: var(--pst-color-text-base);
+      font-family: var(--pst-font-family-base);
+      font-weight: 400;
+      line-height: 1.65;
+      font-size: var(--sbt-font-size-small-1);
+      box-sizing: border-box;
+    }
+  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>References &#8212; Interpreting County-Level COVID-19 Infections</title>
-  
-  
-  
+  <title>References &#8212; Interpreting County-Level COVID-19 Infections</title>
+
+
+
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
-  
+
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-  
+
   <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+  <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+  <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285"
+    type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+  <link rel="stylesheet" type="text/css"
+    href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pages/references';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Related Work and Conclusions" href="Related-Work-Conclusion.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+  <script src="../_static/jquery.js"></script>
+  <script src="../_static/underscore.js"></script>
+  <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+  <script src="../_static/doctools.js"></script>
+  <script src="../_static/clipboard.min.js"></script>
+  <script src="../_static/copybutton.js"></script>
+  <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+  <script>let toggleHintShow = 'Click to show';</script>
+  <script>let toggleHintHide = 'Click to hide';</script>
+  <script>let toggleOpenOnPrint = 'true';</script>
+  <script src="../_static/togglebutton.js"></script>
+  <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+  <script src="../_static/design-tabs.js"></script>
+  <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    const thebe_selector = ".thebe,.cell"
+    const thebe_selector_input = "pre"
+    const thebe_selector_output = ".output, .cell_output"
+  </script>
+  <script async="async" src="../_static/sphinx-thebe.js"></script>
+  <script>DOCUMENTATION_OPTIONS.pagename = 'pages/references';</script>
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="prev" title="Related Work and Conclusions" href="Related-Work-Conclusion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+</head>
 
-  
-  
+
+<body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%"
+  data-default-mode="">
+
+
+
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
+
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
   <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
+
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
   <label class="overlay overlay-secondary" for="__secondary"></label>
-  
+
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
+      <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..."
+          aria-label="Search this book..." autocomplete="off" autocorrect="off" autocapitalize="off"
+          spellcheck="false" />
+        <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+      </form>
+    </div>
   </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
+
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+  </nav>
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
+
       <div class="bd-sidebar-primary bd-sidebar">
-        
 
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
 
-<a class="navbar-brand logo" href="introduction.html">
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/coronavirus.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/coronavirus.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="introduction.html">
-                    Introduction
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="data-and-features.html">Input Data and Features</a></li>
-<li class="toctree-l1"><a class="reference internal" href="problem.html">Problem Statement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tft.html">Temporal Fusion Transformer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results.html">Results</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FeatureImportance.html">Feature Importance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="replication.html">Code Replication</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="Related-Work-Conclusion.html">Related Work and Conclusions</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">References</a></li>
-</ul>
+        <div class="sidebar-header-items sidebar-primary__section">
 
-    </div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+
+
+
+        </div>
+
+        <div class="sidebar-primary-items__start sidebar-primary__section">
+          <div class="sidebar-primary-item">
+
+
+            <a class="navbar-brand logo" href="introduction.html">
+
+
+
+
+
+
+
+
+
+              <img src="../_static/coronavirus.jpg" class="logo__image only-light" alt="Logo image" />
+              <script>document.write(`<img src="../_static/coronavirus.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+
+
+            </a>
+          </div>
+          <div class="sidebar-primary-item">
+            <nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+              <div class="bd-toc-item navbar-nav active">
+
+                <ul class="nav bd-sidenav bd-sidenav__home-link">
+                  <li class="toctree-l1">
+                    <a class="reference internal" href="introduction.html">
+                      Introduction
+                    </a>
+                  </li>
+                </ul>
+                <ul class="current nav bd-sidenav">
+                  <li class="toctree-l1"><a class="reference internal" href="data-and-features.html">Input Data and
+                      Features</a></li>
+                  <li class="toctree-l1"><a class="reference internal" href="problem.html">Problem Statement</a></li>
+                  <li class="toctree-l1"><a class="reference internal" href="tft.html">Temporal Fusion Transformer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments</a></li>
+                  <li class="toctree-l1"><a class="reference internal" href="results.html">Results</a></li>
+                  <li class="toctree-l1"><a class="reference internal" href="FeatureImportance.html">Feature
+                      Importance</a></li>
+                  <li class="toctree-l1"><a class="reference internal" href="replication.html">Code Replication</a></li>
+
+                  <li class="toctree-l1"><a class="reference internal" href="Related-Work-Conclusion.html">Related Work
+                      and Conclusions</a></li>
+                  <li class="toctree-l1 current active"><a class="current reference internal" href="#">References</a>
+                  </li>
+                </ul>
+
+              </div>
+            </nav>
+          </div>
+        </div>
+
+
+        <div class="sidebar-primary-items__end sidebar-primary__section">
+        </div>
+
+        <div id="rtd-footer-container"></div>
 
 
       </div>
-      
+
       <main id="main-content" class="bd-main">
-        
-        
-
-<div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
 
 
 
+        <div class="sbt-scroll-pixel-helper"></div>
+
+        <div class="bd-content">
+          <div class="bd-article-container">
+
+            <div class="bd-header-article">
+              <div class="header-article-items header-article__inner">
+
+                <div class="header-article-items__start">
+
+                  <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm"
+                      for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom"
+                      data-bs-toggle="tooltip">
+                      <span class="fa-solid fa-bars"></span>
+                    </label></div>
+
+                </div>
 
 
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/Data-ScienceHub/gpce-covid" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
+                <div class="header-article-items__end">
 
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/Data-ScienceHub/gpce-covid/issues/new?title=Issue%20on%20page%20%2Fpages/references.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
+                  <div class="header-article-item">
 
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
+                    <div class="article-header-buttons">
 
 
 
 
 
+                      <div class="dropdown dropdown-source-buttons">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                          aria-expanded="false" aria-label="Source repositories">
+                          <i class="fab fa-github"></i>
+                        </button>
+                        <ul class="dropdown-menu">
 
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/pages/references.md" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
 
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.md</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
 
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
+                          <li><a href="https://github.com/Data-ScienceHub/gpce-covid" target="_blank"
+                              class="btn btn-sm btn-source-repository-button dropdown-item" title="Source repository"
+                              data-bs-placement="left" data-bs-toggle="tooltip">
+
+
+                              <span class="btn__icon-container">
+                                <i class="fab fa-github"></i>
+                              </span>
+                              <span class="btn__text-container">Repository</span>
+                            </a>
+                          </li>
 
 
 
 
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
+                          <li><a
+                              href="https://github.com/Data-ScienceHub/gpce-covid/issues/new?title=Issue%20on%20page%20%2Fpages/references.html&body=Your%20issue%20content%20here."
+                              target="_blank" class="btn btn-sm btn-source-issues-button dropdown-item"
+                              title="Open an issue" data-bs-placement="left" data-bs-toggle="tooltip">
 
 
-<script>
-document.write(`
+                              <span class="btn__icon-container">
+                                <i class="fas fa-lightbulb"></i>
+                              </span>
+                              <span class="btn__text-container">Open issue</span>
+                            </a>
+                          </li>
+
+                        </ul>
+                      </div>
+
+
+
+
+
+
+                      <div class="dropdown dropdown-download-buttons">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                          aria-expanded="false" aria-label="Download this page">
+                          <i class="fas fa-download"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+
+
+
+                          <li><a href="../_sources/pages/references.md" target="_blank"
+                              class="btn btn-sm btn-download-source-button dropdown-item" title="Download source file"
+                              data-bs-placement="left" data-bs-toggle="tooltip">
+
+
+                              <span class="btn__icon-container">
+                                <i class="fas fa-file"></i>
+                              </span>
+                              <span class="btn__text-container">.md</span>
+                            </a>
+                          </li>
+
+
+
+
+                          <li>
+                            <button onclick="window.print()" class="btn btn-sm btn-download-pdf-button dropdown-item"
+                              title="Print to PDF" data-bs-placement="left" data-bs-toggle="tooltip">
+
+
+                              <span class="btn__icon-container">
+                                <i class="fas fa-file-pdf"></i>
+                              </span>
+                              <span class="btn__text-container">.pdf</span>
+                            </button>
+                          </li>
+
+                        </ul>
+                      </div>
+
+
+
+
+                      <button onclick="toggleFullScreen()" class="btn btn-sm btn-fullscreen-button"
+                        title="Fullscreen mode" data-bs-placement="bottom" data-bs-toggle="tooltip">
+
+
+                        <span class="btn__icon-container">
+                          <i class="fas fa-expand"></i>
+                        </span>
+
+                      </button>
+
+
+                      <script>
+                        document.write(`
   <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
     <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
     <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
-</script>
+                      </script>
 
-<script>
-document.write(`
+                      <script>
+                        document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
-</script>
+                      </script>
 
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
+                    </div>
+                  </div>
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>References</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-        </div>
-    </div>
-</div>
+                </div>
 
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="references">
-<h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
-<!-- https://jupyterbook.org/en/stable/content/citations.html?highlight=citation#select-your-bibliography-style -->
-<div class="docutils container" id="id1">
-<div class="citation" id="id5" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<p>CDC. COVID-19 Vaccinations in the United States Counties. 2020-22. URL: <a class="reference external" href="https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh">https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh</a>.</p>
-</div>
-<div class="citation" id="id2" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
-<p>Bryan Lim, Sercan Ö Arık, Nicolas Loeff, and Tomas Pfister. Temporal fusion transformers for interpretable multi-horizon time series forecasting. <em>International Journal of Forecasting</em>, 37(4):1748–1764, 2021.</p>
-</div>
-<div class="citation" id="id4" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
-<p>SVI. Social vulnerability index. 2020. URL: <a class="reference external" href="https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html">https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html</a>.</p>
-</div>
-<div class="citation" id="id6" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
-<p>Unacast. Social Distancing Scoreboard. 2020-22. URL: <a class="reference external" href="https://www.unacast.com/post/unacast-updates-social-distancing-scoreboard">https://www.unacast.com/post/unacast-updates-social-distancing-scoreboard</a>.</p>
-</div>
-<div class="citation" id="id3" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
-<p>USA Facts. US COVID-19 cases and deaths. 2020-22. URL: <a class="reference external" href="https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/">https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/</a>.</p>
-</div>
-</div>
-</div>
-</section>
+              </div>
+            </div>
 
-    <script type="text/x-thebe-config">
+
+
+            <div id="jb-print-docs-body" class="onlyprint">
+              <h1>References</h1>
+              <!-- Table of contents -->
+              <div id="print-main-content">
+                <div id="jb-print-toc">
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div id="searchbox"></div>
+            <article class="bd-article" role="main">
+
+              <section class="tex2jax_ignore mathjax_ignore" id="references">
+                <h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
+                <!-- https://jupyterbook.org/en/stable/content/citations.html?highlight=citation#select-your-bibliography-style -->
+                <div class="docutils container" id="id1">
+                  <div class="citation" id="id5" role="doc-biblioentry">
+                    <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+                    <p>CDC. COVID-19 Vaccinations in the United States Counties. 2020-22. URL: <a
+                        class="reference external"
+                        href="https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh">https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh</a>.
+                    </p>
+                  </div>
+                  <div class="citation" id="id2" role="doc-biblioentry">
+                    <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+                    <p>Bryan Lim, Sercan Ö Arık, Nicolas Loeff, and Tomas Pfister. Temporal fusion transformers for
+                      interpretable multi-horizon time series forecasting. <em>International Journal of
+                        Forecasting</em>, 37(4):1748–1764, 2021.</p>
+                  </div>
+                  <div class="citation" id="id4" role="doc-biblioentry">
+                    <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+                    <p>SVI. Social vulnerability index. 2020. URL: <a class="reference external"
+                        href="https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html">https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html</a>.
+                    </p>
+                  </div>
+                  <div class="citation" id="id6" role="doc-biblioentry">
+                    <span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+                    <p>Unacast. Social Distancing Scoreboard. 2020-22. URL: <a class="reference external"
+                        href="https://www.unacast.com/post/unacast-updates-social-distancing-scoreboard">https://www.unacast.com/post/unacast-updates-social-distancing-scoreboard</a>.
+                    </p>
+                  </div>
+                  <div class="citation" id="id3" role="doc-biblioentry">
+                    <span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+                    <p>USA Facts. US COVID-19 cases and deaths. 2020-22. URL: <a class="reference external"
+                        href="https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/">https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/</a>.
+                    </p>
+                  </div>
+                  <footer class="bd-footer-article-item">
+
+                    <div class="footer-article-items footer-article__inner">
+
+                      <div class="footer-article-item" style="margin-top: 10px"><!-- Previous / next buttons -->
+                        <div class="prev-next-area">
+                          <a class="left-prev" href="Related-Work-Conclusion.html" title="previous page">
+                            <i class="fa-solid fa-angle-left"></i>
+                            <div class="prev-next-info">
+                              <p class="prev-next-subtitle">previous</p>
+                              <p class="prev-next-title">Related Work and Conclusions</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+
+          </div>
+
+          </section>
+
+          <script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
@@ -407,84 +929,62 @@ document.write(`
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+          <script>kernelName = 'python3'</script>
 
-                </article>
-              
+          </article>
 
-              
-              
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="Related-Work-Conclusion.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Related Work and Conclusions</p>
-      </div>
-    </a>
-</div></div>
-  
-</div>
 
-                </footer>
-              
+
+        </div>
+
+
+        <footer class="bd-footer-content noprint">
+
+          <div class="bd-footer-content__inner container">
+    
+            <div class="footer-item">
+    
+              <p class="component-author">
+                By UVA MLSys
+              </p>
+    
             </div>
-            
-            
-              
-            
+    
+            <div class="footer-item">
+    
+              <p class="copyright">
+    
+                © Copyright 2022.
+                <br />
+    
+              </p>
+    
+            </div>
+    
+            <div class="footer-item">
+    
+            </div>
+    
+            <div class="footer-item">
+    
+            </div>
+    
           </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By UVA MLSys
-</p>
+        </footer>
 
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2022.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
     </div>
+
+
+    </main>
   </div>
-  
+  </div>
+
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
   <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>
-  </body>
+</body>
+
 </html>
