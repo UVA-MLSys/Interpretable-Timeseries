@@ -62,7 +62,10 @@
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="static/test.js"> </script>
+  <script src="https://d3js.org/d3-array.v2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-geo@3"></script>
+  <script src="https://unpkg.com/topojson@3.0.0/dist/topojson.min.js"></script>
 
 </head>
 <body>
@@ -88,7 +91,7 @@
   </section>
 
   <section id="GOAL">
-    <h1><strong> Problem Statement </h1>
+    <h1><strong> Problem Statement </strong> </h1>
     <p> Our goal was to create a deep learning model that would accurately predict daily COVID-19 cases. To achieve this, we used a multivariate, multi-horizon approach that integrates heterogeneous types of inputs for each county.
       In Mathematical notation, we write our problem statement as follow:
     </p>
@@ -146,8 +149,13 @@
       Below are two interactive plots that respectively demonstrates cyclic holiday pattern and weekly seasonal pattern.
     </p>
 
-    <div id="interactive" style="width: 80%; background-color: white; height: 1400px">
-      <p>Click different county buttons to see how our model captures spatial patterns across urban and rural counties in six different States.</p>
+    <div id="interactive" style="width: 80%; background-color: white; height: 2000px">
+      <p>Click counties on the below U.S. map to see how our model captures spatial patterns across urban and rural counties. Or Type in the County Name and State Name to see the one you are interested in!
+        please be in the format of {State, County} e.g: Virginia, Madison
+      </p>
+      <input id="CountyName-input" placeholder="State, County"> 
+      <button id="heatmap" onclick="showheatmap()">Show HeatMap of Cases</button>
+      <!--
       <div class="county-grid">
         <div class="tab-group">
           <div id="county-tab-urban">
@@ -164,9 +172,13 @@
           </div>
         </div>
       </div>
-      <svg id="d3-interactive"></svg>
+    -->
+      <svg id="d3-map" style="margin-bottom:10px"> </svg>
+      <p id="county-name"> </p>
+      <svg id="d3-interactive" style="width:1000px; height:800px"></svg>
+      <div class="tooltip" id="county-tooltip"></div>
+      <p id="placeholder" style="display:none"> </p>
     </div>
-    <script> console.log(svg)</script>
   </section>
 
 
@@ -176,9 +188,7 @@
       <img style ="width: 1200px" src="static/Team.png">
     </div>
   </section>
-
-
-
+  <script src="static/test.js"> </script>
 </body>
 </html>
 

@@ -1,52 +1,69 @@
 document.addEventListener('DOMContentLoaded', function() {
-  updateLineGraph("SaltLake")
+  //updateLineGraph("SaltLake");
+  drawmap();
 })
 
 
 
-function updateLineGraph(buttonId) {
-  // Remove active class from all buttons
-  document.querySelectorAll('.tab-group button').forEach(btn => btn.classList.remove('active'));
-
-  // Add active class to the clicked button
- 
-  const button = document.getElementById(buttonId);
-  button.classList.add('active');
- 
-  // Update line graph data based on countyType
-  const data = getDataByCounty(buttonId);
-
-  // Clear existing line graph
+function updateLineGraph(targetFIPS) {
   d3.select('#d3-interactive').html('');
+  d3.csv("static/all_counties_manipulated.csv").then(function(data){
+    const filteredData = data.filter(row => row.FIPS === targetFIPS);
+    drawLineGraph(filteredData);
+    console.log(filteredData[0].CountyState);
+    d3.select('#county-name').text(filteredData[0].CountyState);
+    document.getElementById("CountyName-input").value=filteredData[0].CountyState;
+  })}
 
-  // Draw line graph with updated data
-  drawLineGraph(data);
-}
+function getCountyState(targetFIPS,event){
+  d3.csv("static/all_counties_manipulated.csv").then(function(data){
+    const filteredData = data.filter(row => row.FIPS === targetFIPS);
+    showTooltip(filteredData[0].CountyState, event.pageX, event.pageY);
+})}
 
 
-function getDataByCounty(buttonId) {
-  // Return the appropriate data based on countyType
-  // You can customize this function to fetch data from an API or use predefined data
-  if (buttonId === 'SaltLake') {
-    d3.csv("static/Utah, Salt Lake.csv").then(data=>{
-      drawLineGraph(data)})
-  } else if (buttonId === 'Hillsborough') {
-    d3.csv("static/Florida, Hillsborough.csv").then(data=>{
-      drawLineGraph(data)})
-  }else if (buttonId === 'Multnomah') {
-    d3.csv("static/Oregon, Multnomah.csv").then(data=>{
-      drawLineGraph(data)})
-  }else if (buttonId === 'Brunswick') {
-    d3.csv("static/Virginia, Brunswick.csv").then(data=>{
-      drawLineGraph(data)})
-  }else if (buttonId === 'Yancey') {
-    d3.csv("static/North Carolina, Yancey.csv").then(data=>{
-      drawLineGraph(data)})
-  }else if (buttonId === 'Ogemaw') {
-    d3.csv("static/Michigan, Ogemaw.csv").then(data=>{
-      drawLineGraph(data)})
-  }
-}
+//   // Remove active class from all buttons
+//   document.querySelectorAll('.tab-group button').forEach(btn => btn.classList.remove('active'));
+
+//   // Add active class to the clicked button
+ 
+//   const button = document.getElementById(buttonId);
+//   button.classList.add('active');
+ 
+//   // Update line graph data based on countyType
+//   const data = getDataByCounty(buttonId);
+
+//   // Clear existing line graph
+//   d3.select('#d3-interactive').html('');
+
+//   // Draw line graph with updated data
+//   drawLineGraph(data);
+// }
+
+
+// function getDataByCounty(buttonId) {
+//   // Return the appropriate data based on countyType
+//   // You can customize this function to fetch data from an API or use predefined data
+//   if (buttonId === 'SaltLake') {
+//     d3.csv("static/Utah, Salt Lake.csv").then(data=>{
+//       drawLineGraph(data)})
+//   } else if (buttonId === 'Hillsborough') {
+//     d3.csv("static/Florida, Hillsborough.csv").then(data=>{
+//       drawLineGraph(data)})
+//   }else if (buttonId === 'Multnomah') {
+//     d3.csv("static/Oregon, Multnomah.csv").then(data=>{
+//       drawLineGraph(data)})
+//   }else if (buttonId === 'Brunswick') {
+//     d3.csv("static/Virginia, Brunswick.csv").then(data=>{
+//       drawLineGraph(data)})
+//   }else if (buttonId === 'Yancey') {
+//     d3.csv("static/North Carolina, Yancey.csv").then(data=>{
+//       drawLineGraph(data)})
+//   }else if (buttonId === 'Ogemaw') {
+//     d3.csv("static/Michigan, Ogemaw.csv").then(data=>{
+//       drawLineGraph(data)})
+//   }
+// }
 
 function drawLineGraph(data) {
   console.log(data)
@@ -95,7 +112,7 @@ function drawLineGraph(data) {
 
   const legendGroup = svg.append('g')
       .attr('class', 'legend')
-      .attr('transform', `translate(${width - 700}, 20)`);
+      .attr('transform', `translate(${width - 200}, 20)`);
 
   const legendEntries = legendGroup.selectAll('.legend-entry')
       .data(legendItems)
@@ -140,3 +157,144 @@ const predictedLine = d3.line()
       .attr('fill', 'none') // Remove any fill
       .attr('stroke', 'blue') // Customize the color for the actual cases;
 }
+
+
+function ready(data){
+  var margin={top:0,left:0,right:0,bottom:0},
+  height=900-margin.top-margin.bottom,
+  width=1200-margin.left-margin.right;
+
+  var projection = d3.geoAlbersUsa()
+    .translate([width/2,height/2])
+    .scale(1700)
+  var path = d3.geoPath().projection(projection)
+  var states = topojson.feature(data,data.objects.states).features
+  console.log(states);
+  var svg  = d3.select("#d3-map")
+            .attr("height",height+margin.top+margin.bottom)
+            .attr("width",width+margin.left+margin.right)
+            .append("g")
+            .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+  // svg.selectAll(".state")
+  // .data(states)
+  // .enter().append("path")
+  // .attr("class","state")
+  // .attr("d",path)
+
+
+  var counties = topojson.feature(data,data.objects.counties).features
+  svg.selectAll(".county")
+  .data(counties)
+  .enter().append("path")
+  .attr("class","county")
+  .attr("d",path)
+  .attr("FIPS", function(d) {
+    return d.id; // Assuming FIPS is a property in the data object
+  })
+  .on("click", function () {
+    // Your onclick event handler code goes here
+    document.querySelectorAll('.county').forEach(county => county.classList.remove('active'));
+    updateLineGraph(this.getAttribute("FIPS"));
+    this.classList.add("active");
+  })
+  .on("mouseover", function (event) {
+    getCountyState(this.getAttribute("FIPS"),event);
+    // Show the tooltip box when hovering over a county
+  })
+  .on("mouseout", function () {
+    // Hide the tooltip box when moving the mouse out of a county
+    hideTooltip();
+  });
+}
+
+function showTooltip(countyState, x, y) {
+  const tooltip = d3.select("#county-tooltip");
+
+  tooltip.style("left", x + "px")
+    .style("top", y + "px")
+    .style("display", "block")
+    .text(countyState);
+}
+
+function hideTooltip() {
+  const tooltip = d3.select("#county-tooltip");
+
+  tooltip.style("display", "none");
+}
+
+function drawmap (){
+  Promise.all([
+    d3.json("static/us.json")
+    // Add more data loading here if needed
+  ]).then(function(data){
+    console.log(data);
+  ready(data[0])
+})}
+
+
+
+const inputElement = document.getElementById('CountyName-input');
+// Function to be triggered when "Enter" key is pressed
+function handleEnterKey(event) {
+  if (event.key === 'Enter') {
+    searchByCountyName();
+  }
+}
+// Add the event listener to the input element
+inputElement.addEventListener('keyup', handleEnterKey);
+
+
+function showheatmap(){
+  d3.csv("static/all_counties_manipulated.csv").then(function(data) {
+    // Use d3.group to group the data by FIPS code and calculate total cases
+    const groupedData = d3.group(data, d => d.FIPS);
+    
+    // Create an object to store the total cases for each county
+    const totalCasesByFIPS = {};
+
+    // Loop through the grouped data to calculate total cases for each county
+    groupedData.forEach((counties, FIPS) => {
+      let totalCases = 0;
+      counties.forEach(county => {
+        totalCases += +county.Cases;
+      });
+      totalCasesByFIPS[FIPS] = totalCases;
+      console.log(totalCasesByFIPS);
+    })
+    // Get all the county elements on your map
+const countyElements = document.querySelectorAll('.county');
+countyElements.forEach(countyElement => {countyElement.classList.remove("active")})
+
+// Create a color scale for the heatmap
+const colorScale = d3.scaleSequential()
+  .domain([0, 500]) // Adjust the domain based on your data
+  .interpolator(d3.interpolateReds); // You can use any other color scale you prefer
+
+// Update the fill colors of the county elements based on the totalCases property
+countyElements.forEach(countyElement => {
+  const FIPS = countyElement.getAttribute("FIPS");
+  const totalCases = totalCasesByFIPS[FIPS];
+
+  if (totalCases !== undefined && totalCases !== 0) {
+    countyElement.style.fill = colorScale(totalCases);
+  } else {
+    // If totalCases not found or missing, set a default color
+    countyElement.style.fill = "gray";
+  }
+});
+  })}
+
+
+
+
+
+function searchByCountyName() {
+  d3.csv("static/all_counties_manipulated.csv").then(function(data){
+    const countyNameInput = document.getElementById("CountyName-input").value;
+    const filteredCounty = data.find(row => row.CountyState === countyNameInput);
+    const targetFIPS = filteredCounty.FIPS;
+    const countyElement = d3.select(`path[FIPS="${targetFIPS}"]`);
+    document.querySelectorAll('.county').forEach(county => county.classList.remove('active'));
+    updateLineGraph(countyElement.node().getAttribute("FIPS"))
+    countyElement.node().classList.add("active");
+  })}
