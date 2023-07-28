@@ -88,12 +88,14 @@ function drawLineGraph(data) {
       .domain(d3.extent(data, d => d.Date))
       .range([0, width]);
 
+
     const yScale = d3.scaleLinear()
       .domain([0, d3.max(data, d => Math.max(d.Predicted_Cases, d.Cases))])
       .range([height, 0]);
 
     // Create x-axis
-    const xAxis = d3.axisBottom(xScale);
+    const xAxis = d3.axisBottom(xScale)
+    .tickFormat(d3.timeFormat('%Y-%m-%d'));;
     svg.append('g')
       .attr('transform', `translate(0, ${height})`)
       .call(xAxis);
@@ -112,7 +114,7 @@ function drawLineGraph(data) {
 
   const legendGroup = svg.append('g')
       .attr('class', 'legend')
-      .attr('transform', `translate(${width - 200}, 20)`);
+      .attr('transform', `translate(${width+20}, 20)`);
 
   const legendEntries = legendGroup.selectAll('.legend-entry')
       .data(legendItems)
@@ -245,6 +247,18 @@ inputElement.addEventListener('keyup', handleEnterKey);
 
 
 function showheatmap(){
+  if (document.querySelector("#heatmap").classList.contains("active")){
+    document.querySelector("#heatmap").textContent="HeatMap of Cases";
+    const countyElements = document.querySelectorAll('.county');
+    d3.selectAll("g#legend").remove();
+    countyElements.forEach(countyElement => {
+      countyElement.style.fill="none";
+      document.querySelector("#heatmap").classList.remove("active")});}
+
+  else{
+  document.querySelector("#heatmap").classList.add("active");
+  document.querySelector("#heatmap").textContent="Hide Heatmap";
+
   d3.csv("static/all_counties_manipulated.csv").then(function(data) {
     // Use d3.group to group the data by FIPS code and calculate total cases
     const groupedData = d3.group(data, d => d.FIPS);
@@ -261,15 +275,19 @@ function showheatmap(){
       totalCasesByFIPS[FIPS] = totalCases;
       console.log(totalCasesByFIPS);
     })
+
+  const maxCases = d3.max(Object.values(totalCasesByFIPS));
+  console.log(maxCases);
     // Get all the county elements on your map
 const countyElements = document.querySelectorAll('.county');
 countyElements.forEach(countyElement => {countyElement.classList.remove("active")})
 
 // Create a color scale for the heatmap
 const colorScale = d3.scaleSequential()
-  .domain([0, 500]) // Adjust the domain based on your data
+  .domain([0, maxCases]) // Adjust the domain based on your data
   .interpolator(d3.interpolateReds); // You can use any other color scale you prefer
 
+drawLegend(colorScale,maxCases);
 // Update the fill colors of the county elements based on the totalCases property
 countyElements.forEach(countyElement => {
   const FIPS = countyElement.getAttribute("FIPS");
@@ -282,19 +300,60 @@ countyElements.forEach(countyElement => {
     countyElement.style.fill = "gray";
   }
 });
-  })}
+  })}}
 
 
 
+// Function to draw the color scale legend
+function drawLegend(colorScale,maxCases) {
+  const legendWidth = 200;
+  const legendHeight = 40; // Increased height to accommodate text labels
+  const numSteps = 20; // Number of steps in the legend gradient
+  const stepSize = legendWidth / numSteps;
 
+  // Select the SVG element for the map
+  const svg = d3.select("#d3-map");
 
-function searchByCountyName() {
-  d3.csv("static/all_counties_manipulated.csv").then(function(data){
-    const countyNameInput = document.getElementById("CountyName-input").value;
-    const filteredCounty = data.find(row => row.CountyState === countyNameInput);
-    const targetFIPS = filteredCounty.FIPS;
-    const countyElement = d3.select(`path[FIPS="${targetFIPS}"]`);
-    document.querySelectorAll('.county').forEach(county => county.classList.remove('active'));
-    updateLineGraph(countyElement.node().getAttribute("FIPS"))
-    countyElement.node().classList.add("active");
-  })}
+  // Create an SVG group for the legend
+  const legendGroup = svg.append("g")
+    .attr("id", "legend")
+    .attr("transform", "translate(500, 50)"); // Adjust the position as needed
+
+  // Define a linear gradient for the legend
+  const gradient = legendGroup.append("defs")
+    .append("linearGradient")
+    .attr("id", "legendGradient")
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%");
+
+  // Add color stops to the gradient based on the color scale
+  for (let i = 0; i <= numSteps; i++) {
+    gradient.append("stop")
+      .attr("offset", i / numSteps)
+      .attr("stop-color", colorScale(i * maxCases / numSteps)); // Adjust the domain for your data
+  }
+
+  // Draw the color scale legend as a rectangle with the gradient
+  legendGroup.append("rect")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .style("fill", "url(#legendGradient)");
+
+  // Add text labels for the minimum and maximum values of the color scale
+  const minValue = 0;
+  const maxValue = maxCases;
+
+  legendGroup.append("text")
+    .attr("x", 0)
+    .attr("y", legendHeight - 15) // Adjusted position to avoid overlapping
+    .text(minValue) // Minimum value, adjust as needed
+
+  legendGroup.append("text")
+    .attr("x", legendWidth)
+    .attr("y", legendHeight - 15) // Adjusted position to avoid overlapping
+    .attr("text-anchor", "end")
+    .text(maxValue) // Maximum value, adjust as needed
+}
+

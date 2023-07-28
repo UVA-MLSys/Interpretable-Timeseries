@@ -230,12 +230,12 @@
 
   #CountyName-input{
     border: none;
-    color: white;
+    color: #FFFFFF;
     text-align: center;
     font-size: 18px;
-    background-color: grey;
-    width: 300px;
-    height: 40px;
+    background-color: #464c53;
+    width: 260px;
+    height: 60px;
   }
 
   input::placeholder {
@@ -244,4 +244,40 @@
     text-align: center; /* Center-align the placeholder text */
   }
   
+
+  #control-viz{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:20px;
+  }
+  #heatmap {
+    width: 260px;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #464c53;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Active Effect */
+  #heatmap.active {
+    background-color: #cbd7e4;
+    color: #464c53;
+  }
+  
+  #heatmap:hover {
+    background-color: #cbd7e4;
+    color: #464c53;
+  }
+
+  .text{
+    fill: black;
+    z-index:4;
+  }
   

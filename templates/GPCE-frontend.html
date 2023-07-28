@@ -150,11 +150,15 @@
     </p>
 
     <div id="interactive" style="width: 80%; background-color: white; height: 2000px">
-      <p>Click counties on the below U.S. map to see how our model captures spatial patterns across urban and rural counties. Or Type in the County Name and State Name to see the one you are interested in!
+      <p>Click counties on the below U.S. map to see how our model captures spatial patterns across urban and rural counties. Data comes from our test split between 12-15-2021 and 12-29-2021. Heatmap is based on the ground-truth total sum of counties.
+        Or Type in the County Name and State Name to see the one you are interested in!
         please be in the format of {State, County} e.g: Virginia, Madison
       </p>
-      <input id="CountyName-input" placeholder="State, County"> 
-      <button id="heatmap" onclick="showheatmap()">Show HeatMap of Cases</button>
+      <div id="control-viz"> 
+        <input id="CountyName-input" placeholder="State, County"> 
+        <button id="heatmap" onclick="showheatmap()"> HeatMap of Cases</button>
+      </div>
+      <div id="legend"> </div>
       <!--
       <div class="county-grid">
         <div class="tab-group">
@@ -173,7 +177,7 @@
         </div>
       </div>
     -->
-      <svg id="d3-map" style="margin-bottom:10px"> </svg>
+      <svg id="d3-map" style="margin-top:10px"> </svg>
       <p id="county-name"> </p>
       <svg id="d3-interactive" style="width:1000px; height:800px"></svg>
       <div class="tooltip" id="county-tooltip"></div>
