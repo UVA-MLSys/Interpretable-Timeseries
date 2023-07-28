@@ -357,3 +357,14 @@ function drawLegend(colorScale,maxCases) {
     .text(maxValue) // Maximum value, adjust as needed
 }
 
+
+function searchByCountyName() {
+  d3.csv("static/all_counties_manipulated.csv").then(function(data){
+    const countyNameInput = document.getElementById("CountyName-input").value;
+    const filteredCounty = data.find(row => row.CountyState === countyNameInput);
+    const targetFIPS = filteredCounty.FIPS;
+    const countyElement = d3.select(`path[FIPS="${targetFIPS}"]`);
+    document.querySelectorAll('.county').forEach(county => county.classList.remove('active'));
+    updateLineGraph(countyElement.node().getAttribute("FIPS"))
+    countyElement.node().classList.add("active");
+  })}
