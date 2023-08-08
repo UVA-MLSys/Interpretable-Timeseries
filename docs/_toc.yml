@@ -7,7 +7,9 @@ chapters:
 - file: pages/data-and-features
 - file: pages/problem
 - file: pages/tft
+- file: pages/experiments
 - file: pages/results
-- file: pages/features
+- file: pages/FeatureImportance
+- file: pages/replication
+- file: pages/Related-Work-Conclusion
 - file: pages/references
-- file: pages/test

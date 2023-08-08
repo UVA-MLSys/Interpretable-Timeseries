@@ -3,7 +3,7 @@
 
 title: Interpreting County-Level COVID-19 Infections
 author: UVA MLSys
-logo: images/coronavirus.jpg
+logo: images/NSF_UVA_Logo.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

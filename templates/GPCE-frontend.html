@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  .dot {
+      fill: steelblue;
+      r: 5;
+    }
+  </style>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var sections = document.querySelectorAll('section');
+      var navLinks = document.querySelectorAll('nav a');
+    
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+    
+          var destination = document.querySelector(this.getAttribute('href'));
+          var offsetTop = destination.offsetTop;
+    
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        });
+      });
+    
+      window.addEventListener('scroll', function() {
+        var currentSection = null;
+    
+        // Find the currently visible section
+        for (var i = sections.length - 1; i >= 0; i--) {
+          var section = sections[i];
+          var rect = section.getBoundingClientRect();
+    
+          if (rect.top <= 0) {
+            currentSection = section;
+            break;
+          }
+        }
+    
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+        });
+    
+        if (currentSection) {
+          var targetLink = document.querySelector('nav a[href="#' + currentSection.id + '"]');
+          if (targetLink) {
+            targetLink.classList.add('active');
+          }
+        }
+      });
+    });
+    
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel = "stylesheet" href="static/gpce-frontend.css">
+  <link href='https://fonts.googleapis.com/css2?family=Lora&display=swap'rel="stylesheet">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://d3js.org/d3-array.v2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-geo@3"></script>
+  <script src="https://unpkg.com/topojson@3.0.0/dist/topojson.min.js"></script>
+
+</head>
+<body>
+  <nav>
+    <ul class="left-ul">
+      <li>  <strong>INTERPRETATING COUNTY-LEVEL COVID INFECTIONS </strong></li>
+    </ul>
+    <ul class="right-ul">
+      <li><a href="#INTRODUCTION">INTRO</a></li>
+      <li><a href="#GOAL">GOAL</a></li>
+      <li><a href="#DATA">DATA</a></li>
+      <li><a href="#EXPERIMENTS">EXPERIMENTS</a></li>
+      <li><a href="#RESULTS">RESULTS</a></li>
+      <li><a href="#INTERPRETATION">INTERPRETATION</a></li>
+      <li><a href="#TEAM">TEAM</a></li>
+    </ul>
+  </nav>
+
+  <section  id="INTRODUCTION">
+    <h1> <strong>Interpreting County-Level COVID-19 Infections <br>using Deep Learning for Time Series </strong> </h1>
+    <p style="width:70%"> Using Temporal Fusion Transformer to predict County-Level Infections <br>with spatial-temporal Interpretations </p>
+    <iframe style="margin-top:20px" width="880" height="400" src="https://www.youtube.com/embed/ref11GvSm4w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </section>
+
+  <section id="GOAL">
+    <h1><strong> Problem Statement </strong> </h1>
+    <p> Our goal was to create a deep learning model that would accurately predict daily COVID-19 cases. To achieve this, we used a multivariate, multi-horizon approach that integrates heterogeneous types of inputs for each county.
+      In Mathematical notation, we write our problem statement as follow:
+    </p>
+    <p> \( \hat y_i(t, \tau) = f(\tau, y_{i, t-k:t}, \textbf{z}_{i, t-k:t}, \textbf{x}_{i, t-k:t+\tau}, \textbf{s}_i ) \) </p>
+    <p> \(\hat y_i(t, \tau)\) represents the predicted number of cases in a day at a given time \(t \in [0, T_i]\) for any county \(i\), with \(\tau\) as days into the future, and \(T_i\) as the length of the time series period. 
+    In our study, we use the previous 13 days of data to forecast the next 15 days of data ---- this is where the multi-horizon approach comes in. 
+    <div class="image-container">
+      <img src="static/goal.png" style="height:600px;">
+    </div>
+    <p> Our three types of inputs are: <br>
+      1. <strong>Static Inputs</strong> : Each county <em>i</em> is associated with a set of static inputs \(s_i\), which do not vary over time and are specific to that county's demographics. <br>
+      2. <strong>Observed or Past Inputs</strong> : Observed inputs are time-varying features known at each timestamp \(t \in [0, T_i]\) (e.g., Vacciation, Disease Spread, Social Distancing, Transmissible Cases), but their future values are unknown. We incorporate all past information within a lookback window of <em>k</em> (the past 13 days), using target (cases) and observed inputs upto the forecast start time *t*:      \(\space y_{i,t-k:t} = {y_{i,t-k}, ..., y_{i, t} }\) and \(z_{i, t-k:t} = {z_{i,t-k}, ..., z{i, t}}\). <br>
+      3. <strong>Known Future Inputs </strong>: These inputs \(x_{i, t}\) can be measured beforehand, which in our case are the sine and cosine of the day of a week at a given date, and are known at the time of prediction. We also add known future inputs across the entire range for the TFT. </p>
+  </section>
+
+  <section id="DATA">
+    <h1>DATA</h1>
+    <p>We collected our dataset from multiple sources, including CDC (Centers for Disease Control and Prevention), USA Facts [15], and Unacast [16]. The collected data covers a time frame from February 29, 2020, to May 17, 2022, and includes a wide range of county-level features. However, for the vaccination feature, we used data from the CDC [17] starting from December 14, 2020, when the US initiated a nationwide COVID-19 vaccination campaign, as it was the earliest available data.</p>
+    <div class="Data-Split-container">
+      <img src=static/Data.png> 
+    </div>
+  </section>
+
+  <section id="EXPERIMENTS">
+    <h1> Experiments </h1>
+    <p>
+      In our Data-Split, validation set comprises the next 15 days after the training period, and the test set comprises the following 15 days after the validation set.
+    </p>
+    <p style="margin-top:5px">For Benchmarking purposes, we have fine-tuned five Deep Learning Model: 
+      our proposed TFT model, LSTM, Bi-LSTM, NBEATS, and NHiTS, with last four being benchmarks.
+      All Models are optimized with Adam Optimizer and MSE Loss. We select best configurations based on validation loss. 
+    </p>
+
+    <div class="Data-Split-container">
+      <img src=static/Experiment-result.png> 
+    </div>
+    <p> We could see that across all measuring criterias, our TFT model has achieved the state-of-art performance.</p>
+
+
+  </section>
+
+  <section id="RESULTS">
+    <h1>Model Performance</h1>
+    <p> In terms of both ground truth and benchmarking with other popular Deep Learning Models, our proposed TFT models have proved remarkable performance.</p>
+    <div class="performance-container">
+      <img src="static/Benchmark.png" >
+      <img src="static/Ground-Truth.png" >
+    </div>
+  
+  </section>
+
+  <section id="INTERPRETATION">
+    <h1>Spatio-Temporal Interpretation</h1>
+    <p> Time Series Data typically exhibits temporal pattern such as trend, cyclic, and seasonal pattern. And our proposed TFT are able to detect such patterns. 
+      Below are two interactive plots that respectively demonstrates cyclic holiday pattern and weekly seasonal pattern.
+    </p>
+
+    <div id="interactive" style="width: 80%; background-color: white; height: 2000px">
+      <p>Click counties on the below U.S. map to see how our model captures spatial patterns across urban and rural counties. Or Type in the County Name and State Name to see the one you are interested in!
+        please be in the format of {State, County} e.g: Virginia, Madison
+      </p>
+      <input id="CountyName-input" placeholder="State, County"> 
+      <button id="heatmap" onclick="showheatmap()">Show HeatMap of Cases</button>
+      <!--
+      <div class="county-grid">
+        <div class="tab-group">
+          <div id="county-tab-urban">
+            <button id="SaltLake" onclick="updateLineGraph('SaltLake')">Salt Lake</button>
+            <button id="Hillsborough" onclick="updateLineGraph('Hillsborough')">Hillsborough</button>
+            <button id="Multnomah" onclick="updateLineGraph('Multnomah')">Multnomah</button>
+          </div>
+        </div>
+        <div class="tab-group">
+          <div id="county-tab-rural">
+            <button id="Brunswick" onclick="updateLineGraph('Brunswick')">Brunswick</button>
+            <button id="Yancey" onclick="updateLineGraph('Yancey')">Yancey</button>
+            <button id="Ogemaw" onclick="updateLineGraph('Ogemaw')">Ogemaw</button>
+          </div>
+        </div>
+      </div>
+    -->
+      <svg id="d3-map" style="margin-bottom:10px"> </svg>
+      <p id="county-name"> </p>
+      <svg id="d3-interactive" style="width:1000px; height:800px"></svg>
+      <div class="tooltip" id="county-tooltip"></div>
+      <p id="placeholder" style="display:none"> </p>
+    </div>
+  </section>
+
+
+  <section id="TEAM">
+    <h1>Team</h1>
+    <div>
+      <img style ="width: 1200px" src="static/Team.png">
+    </div>
+  </section>
+  <script src="static/test.js"> </script>
+</body>
+</html>
+
