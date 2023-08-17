@@ -136,8 +136,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+    
+    
+      
+    
+    
+    <img src="../_static/NSF_UVA_Logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/NSF_UVA_Logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
-    <p class="title logo__title">Interpreting County-Level COVID-19 Infections</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -372,15 +378,15 @@ document.write(`
 <h1>Related Work and Conclusions<a class="headerlink" href="#related-work-and-conclusions" title="Permalink to this heading">#</a></h1>
 <section id="statistical-and-machine-learning-models">
 <h2>Statistical and Machine Learning Models<a class="headerlink" href="#statistical-and-machine-learning-models" title="Permalink to this heading">#</a></h2>
-<p>Many statistical methods including Susceptible Infectious Recovery and Auto-Regressive Integrated Moving Acerage model have been used to sumulate and forecast COVID-19 spread, yet they fall short of dealing with high-dimensional and temporal data. While they are easier to interpret comparing to Deep Learning Models due to DL’s black-box nature, deep learning models excel them in terms of performance accuracy and the ability to captue non-linear complex relationships across variables.</p>
+<p>Many statistical methods including Susceptible Infectious Recovery and Auto-Regressive Integrated Moving Acerage model have been used to sumulate and forecast COVID-19 spread, yet they fall short of dealing with high-dimensional and temporal data. While they are easier to interpret comparing to Deep Learning Models due to DL’s black-box nature, deep learning models excel them in terms of performance accuracy and the ability to captue non-linear complex relationships across variables. <span id="id1">[<a class="reference internal" href="references.html#id7" title="J. C. Clement, V. Ponnusamy, K. Sriharipriya, and R. Nandakumar. A survey on mathematical, machine learning and deep learning models for covid-19 transmission and diagnosis. IEEE Reviews in Biomedical Engineering, 15:325–340, 2021.">Clement <em>et al.</em>, 2021</a>]</span></p>
 </section>
 <section id="deep-learing-models">
 <h2>Deep Learing Models<a class="headerlink" href="#deep-learing-models" title="Permalink to this heading">#</a></h2>
-<p>Previously LSTM and Bi-LSTM models have demonstarted their remarkable performance because of RNN’s ability to learn from sequential data. Later on the Variational Auto Encoder has outperfoms RNN-based model. However, desptite Deep Learning Model’s outstanding performance, there are concerns about interpretability and their inability to capture socioeconomical factors.</p>
+<p>Previously LSTM and Bi-LSTM models have demonstarted their remarkable performance because of RNN’s ability to learn from sequential data. Later on the Variational Auto Encoder has outperfoms RNN-based model. However, desptite Deep Learning Model’s outstanding performance, there are concerns about interpretability and their inability to capture socioeconomical factors. <span id="id2">[<a class="reference internal" href="references.html#id8" title="B. Lim and S. Zohren. Time-series forecasting with deep learning: a survey. Philosophical Transactions of the Royal Society A, 379(2194):20200209, 2021.">Lim and Zohren, 2021</a>]</span></p>
 </section>
 <section id="conclusions">
 <h2>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this heading">#</a></h2>
-<p>Our proposed TFT model has achieved state-of-the-art performance while enabling new forms of interpretability through analyzing complex spatiotermporal patterns. Our model has 4 main achievements: (1) outperforms other models in all evaluation metrics (2) exhibits robust performance dealing with non-stionary data (3) interprets termporal patterns (4) interprets spatial patterns. <br>
+<p>Our proposed attention-based TFT model has achieved state-of-the-art performance while enabling new forms of interpretability through analyzing complex spatiotermporal patterns. Our model has 4 main achievements: (1) outperforms other models in all evaluation metrics (2) exhibits robust performance dealing with non-stionary data (3) interprets termporal patterns (4) interprets spatial patterns. <span id="id3">[<a class="reference internal" href="references.html#id9">Vaswani <em>et al.</em>, 2017</a>]</span> <br>
 Our model has creatively incorporated spatial factors at county level, and such methodology can be easily extended to other datasets at community level (e.g population, socioeconomic factors). Future work could focus on analyzing the sensitivity of input features and adaptively optimizing the model for dynamic data.</p>
 </section>
 </section>
